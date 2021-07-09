@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.yellow
         window?.rootViewController = ADTabbarVC()
         window?.makeKeyAndVisible()
-        
+        //1.0版本
         return true
     }
 
