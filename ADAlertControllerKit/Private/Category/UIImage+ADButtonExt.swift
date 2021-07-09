@@ -46,6 +46,7 @@ extension UIButton {
 
         var labelWidth :CGFloat = title.size(withAttributes: [NSAttributedString.Key.font : self.titleLabel?.font as Any]).width
         let labelHeight :CGFloat = title.size(withAttributes: [NSAttributedString.Key.font : self.titleLabel?.font as Any]).height
+        
         if postion.isHorizontal {
             if self.frame.size.width - imageWidth < labelWidth{
                 labelWidth = self.frame.size.width - imageWidth
