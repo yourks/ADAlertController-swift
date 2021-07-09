@@ -100,7 +100,7 @@ class ADAlertAction: NSObject {
         if _image != nil&&_title != nil {
             actionBtn.setImage(_image, for: UIControl.State.normal)
             actionBtn.setTitle(_title, for: UIControl.State.normal)
-            actionBtn.setImagePosition(postion: ADBtnImagePosition.ADBtnImagePositionTop, spacing: 5)
+            actionBtn.setImagePosition(postion: .top, spacing: 5)
         }
         if _image != nil&&_title == nil{
             actionBtn.setImage(_image, for: UIControl.State.normal)
