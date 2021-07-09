@@ -12,6 +12,7 @@ class ADAlertControllerConfiguration: NSObject {
      alertController 类型,默认 alert类型
      */
     var preferredStyle :ADAlertControllerStyle = ADAlertControllerStyle.ADAlertControllerStyleAlert
+    //ADAlertControllerStyle.Alert
     /**
      点击背景是否关闭警告框视图,默认 NO
      */
