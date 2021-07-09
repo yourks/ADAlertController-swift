@@ -158,11 +158,6 @@
 		18055EE9268EC26000A0B667 /* Transition */ = {
 			isa = PBXGroup;
 			children = (
-				18055F1B268EC36500A0B667 /* ADAlertControllerPresentationController.swift */,
-				18055F20268EC37300A0B667 /* ADAlertControllerTransitionConst.swift */,
-				18055F11268EC35300A0B667 /* ADAlertViewAlertStyleTransition.swift */,
-				18055F16268EC35B00A0B667 /* ADAlertViewSheetStyleTransition.swift */,
-				18055F25268EC37B00A0B667 /* ADAlertViewAlertStyleTransitionProtocol.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -170,10 +165,6 @@
 		18055EEA268EC26000A0B667 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				18055EEB268EC26000A0B667 /* ADActionSheetView.swift */,
-				18055EEC268EC26000A0B667 /* ADAlertView.swift */,
-				18055EED268EC26000A0B667 /* ADAlertControllerViewProtocol.swift */,
-				18B435A0269711C3007826DB /* ADAlertViewConst.swift */,
 				18055EEE268EC26000A0B667 /* Toolview */,
 			);
 			path = View;
@@ -182,9 +173,6 @@
 		18055EEE268EC26000A0B667 /* Toolview */ = {
 			isa = PBXGroup;
 			children = (
-				18055EEF268EC26000A0B667 /* ADAlertTitleLabel.swift */,
-				18055EF0268EC26000A0B667 /* ADAlertButton.swift */,
-				18055EF1268EC26000A0B667 /* ADAlertTextView.swift */,
 			);
 			path = Toolview;
 			sourceTree = "<group>";
@@ -192,7 +180,6 @@
 		18055EFB268EC27400A0B667 /* funcCategory */ = {
 			isa = PBXGroup;
 			children = (
-				18055F332692DF0700A0B667 /* ADAlertController+TransitioningDelegate.swift */,
 			);
 			path = funcCategory;
 			sourceTree = "<group>";
@@ -347,13 +334,34 @@
 		189097E626856A420003D894 /* ADAlertControllerKit */ = {
 			isa = PBXGroup;
 			children = (
-				18AED9DD2685BD3400115D75 /* ADAlertAction */,
-				18AED9D42685BC4B00115D75 /* Private */,
+				18B4358A2696FDD4007826DB /* UIImage+ADImageExt.swift */,
+				18B43592269704F5007826DB /* UIViewController+ADViewControllerExt.swift */,
+				18B435A52697144A007826DB /* UIImage+ADButtonExt.swift */,
+				18AED9DE2685BD3E00115D75 /* ADAlertAction.swift */,
+				18055ED1268EBE6D00A0B667 /* ADAlertGroupAction.swift */,
+				18055ED6268EBE8200A0B667 /* ADScrollableGroupAction.swift */,
+				18055F332692DF0700A0B667 /* ADAlertController+TransitioningDelegate.swift */,
+				18055F1B268EC36500A0B667 /* ADAlertControllerPresentationController.swift */,
+				18055F20268EC37300A0B667 /* ADAlertControllerTransitionConst.swift */,
+				18055F11268EC35300A0B667 /* ADAlertViewAlertStyleTransition.swift */,
+				18055F16268EC35B00A0B667 /* ADAlertViewSheetStyleTransition.swift */,
+				18055F25268EC37B00A0B667 /* ADAlertViewAlertStyleTransitionProtocol.swift */,
+				18055EEB268EC26000A0B667 /* ADActionSheetView.swift */,
+				18055EEC268EC26000A0B667 /* ADAlertView.swift */,
+				18055EED268EC26000A0B667 /* ADAlertControllerViewProtocol.swift */,
+				18B435A0269711C3007826DB /* ADAlertViewConst.swift */,
+				18055EEF268EC26000A0B667 /* ADAlertTitleLabel.swift */,
+				18055EF0268EC26000A0B667 /* ADAlertButton.swift */,
+				18055EF1268EC26000A0B667 /* ADAlertTextView.swift */,
+				18AED9D52685BC6800115D75 /* ADAlertWindow.swift */,
+				18055F2B2692C01C00A0B667 /* ADAlertTransitioningDelegate.swift */,
 				189097E726856A720003D894 /* ADAlertController.swift */,
 				18055EC7268EBE0700A0B667 /* ADAlertControllerPriorityQueue.swift */,
 				18AED9CF2685BBF100115D75 /* ADAlertControllerConfiguration.swift */,
 				18D6E5B62689ABDB00B37ACF /* ADAlertControllerConst.swift */,
 				18E17C03268AC343002ED7DC /* ADAlertActionConfiguration.swift */,
+				18AED9DD2685BD3400115D75 /* ADAlertAction */,
+				18AED9D42685BC4B00115D75 /* Private */,
 			);
 			path = ADAlertControllerKit;
 			sourceTree = "<group>";
@@ -364,8 +372,6 @@
 				18055EFB268EC27400A0B667 /* funcCategory */,
 				18055EE9268EC26000A0B667 /* Transition */,
 				18055EEA268EC26000A0B667 /* View */,
-				18AED9D52685BC6800115D75 /* ADAlertWindow.swift */,
-				18055F2B2692C01C00A0B667 /* ADAlertTransitioningDelegate.swift */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -374,9 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				18B435812696FD3B007826DB /* toolCategory */,
-				18AED9DE2685BD3E00115D75 /* ADAlertAction.swift */,
-				18055ED1268EBE6D00A0B667 /* ADAlertGroupAction.swift */,
-				18055ED6268EBE8200A0B667 /* ADScrollableGroupAction.swift */,
 			);
 			path = ADAlertAction;
 			sourceTree = "<group>";
@@ -384,9 +387,6 @@
 		18B435812696FD3B007826DB /* toolCategory */ = {
 			isa = PBXGroup;
 			children = (
-				18B4358A2696FDD4007826DB /* UIImage+ADImageExt.swift */,
-				18B43592269704F5007826DB /* UIViewController+ADViewControllerExt.swift */,
-				18B435A52697144A007826DB /* UIImage+ADButtonExt.swift */,
 			);
 			path = toolCategory;
 			sourceTree = "<group>";
@@ -800,6 +800,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Example/ADAlertController-swift/Main/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -819,6 +820,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Example/ADAlertController-swift/Main/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
