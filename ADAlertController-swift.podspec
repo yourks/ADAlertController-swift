@@ -91,7 +91,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "ADAlertController-swift/ADAlertControllerKit/**/*.{h,m}"
+  spec.source_files  = "ADAlertControllerKit"
   #spec.exclude_files = "ADAlertController-swift/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
