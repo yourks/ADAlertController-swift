@@ -1,2 +1,8 @@
+
+
 # ADAlertController-swift
-这是一个alert封装库
+
+
+## License
+
+This project is licensed under the Apache License 2.0
