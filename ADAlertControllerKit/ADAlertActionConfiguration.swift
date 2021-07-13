@@ -7,9 +7,7 @@
 
 import UIKit
 
-class ADAlertActionConfiguration: NSObject
-//,NSCopying
-{
+class ADAlertActionConfiguration: NSObject {
     
     /**
      alertAction 显示的标题字体,默认为[UIFont preferredFontForTextStyle:UIFontTextStyleBody]
@@ -32,31 +30,23 @@ class ADAlertActionConfiguration: NSObject
      @param preferredStyle alertview类型
      @return 默认配置对象
      */
-    public static func defaultConfigurationWithActionStyle(style :ADActionStyle) -> ADAlertActionConfiguration{
-        let config :ADAlertActionConfiguration = ADAlertActionConfiguration()
+    public static func defaultConfigurationWithActionStyle(style: ADActionStyle) -> ADAlertActionConfiguration {
+        let config: ADAlertActionConfiguration = ADAlertActionConfiguration()
         switch style {
         case .ADActionStyleDestructive:
-            config.titleColor = UIColor.red;
-            config.disabledTitleColor = UIColor.red;
-            break
+            config.titleColor = UIColor.red
+            config.disabledTitleColor = UIColor.red
         default:
-            break;
+            break
         }
-        return config;
+        return config
     }
-
-
-        
+    
     // MARK: - 初始化方法
-       
-    private override init(){
-        titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body);
+    private override init() {
+        titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         titleColor = UIColor.darkGray
         disabledTitleColor = UIColor.gray.withAlphaComponent(0.6)
         super.init()
     }
-
-//    func copy(with zone: NSZone? = nil) -> Any {
-//
-//    }
 }

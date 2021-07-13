@@ -9,17 +9,17 @@ import UIKit
 
 class ADAlertTextView: UITextView {
 
-    //Mark：- proprety/private
-    private var heightConstraint :NSLayoutConstraint?
+    // Mark：- proprety/private
+    private var heightConstraint: NSLayoutConstraint?
     
-    //Mark：- func/init
+    // Mark：- func/init
     internal override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
 
         heightConstraint = self.heightAnchor.constraint(equalToConstant: 0.0)
         heightConstraint?.priority = UILayoutPriority.defaultHigh
         heightConstraint?.isActive = true
-        self.textContainerInset = UIEdgeInsets.zero;
+        self.textContainerInset = UIEdgeInsets.zero
     }
 
     internal required init?(coder: NSCoder) {
@@ -27,27 +27,27 @@ class ADAlertTextView: UITextView {
     }
 
     override var text: String! {
-        didSet{
+        didSet {
             self.updateHeightConstraint()
         }
     }
 
     override var bounds: CGRect {
-        willSet{
+        willSet {
             
-            let oldBounds :CGRect  = self.bounds;
+            let oldBounds: CGRect  = self.bounds
 
             super.bounds = newValue
 
-            if oldBounds.width == newValue.width , oldBounds.height == newValue.height  {
-            }else{
+            if oldBounds.width == newValue.width, oldBounds.height == newValue.height {
+            } else {
                 self.updateHeightConstraint()
             }
         }
     }
 
-    //Mark：- func/private
-    private func updateHeightConstraint() -> Void {
+    // Mark：- func/private
+    private func updateHeightConstraint() {
         if text.count > 0 {
             self.heightConstraint!.constant = self.sizeThatFits(CGSize(width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)).height
             
@@ -56,9 +56,9 @@ class ADAlertTextView: UITextView {
                 self.isUserInteractionEnabled = true
             }
 
-        }else{
+        } else {
             heightConstraint?.constant = 0
-            self.textContainerInset = UIEdgeInsets.zero;
+            self.textContainerInset = UIEdgeInsets.zero
 
         }
     }

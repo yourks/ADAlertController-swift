@@ -7,5 +7,5 @@
 
 import UIKit
 
-//ActionSheetStyle 间距
-let ADActionSheetStyleLeadingTrailingPad :CGFloat = 20
+// ActionSheetStyle 间距
+let ADActionSheetStyleLeadingTrailingPad: CGFloat = 20

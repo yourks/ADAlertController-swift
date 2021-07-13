@@ -8,58 +8,58 @@
 import UIKit
 import SnapKit
 
-class ADAlertView: UIView,ADAlertControllerViewProtocol {
+class ADAlertView: UIView, ADAlertControllerViewProtocol {
  
     // MARK: - propert/private
     
-    //titleLab
+    // titleLab
     private var titleLabel: ADAlertTitleLabel?
     
-    //messageTextView
+    // messageTextView
     private var messageTextView: ADAlertTextView?
     
-    //contentViewContainerView
+    // contentViewContainerView
     private var contentViewContainerView: UIView?
     
-    //textFieldContainerView
+    // textFieldContainerView
     private var textFieldContainerView: UIView?
     
-    //actionButtonContainerView
+    // actionButtonContainerView
     private var actionButtonContainerView: UIView?
     
-    //actionButtonStackView
+    // actionButtonStackView
     private var actionButtonStackView: UIStackView?
 
-    //separatorView
+    // separatorView
     private var separatorView: UIView?
     
-    //alertBackgroundWidthConstraint
+    // alertBackgroundWidthConstraint
     private var alertBackgroundWidthConstraint: NSLayoutConstraint?
     
-    //configuration
+    // configuration
     private var configuration: ADAlertControllerConfiguration?
 
     // MARK: - propert/protrocal
-    var title: String?{
-        didSet{
+    var title: String? {
+        didSet {
             titleLabel?.text = title
         }
     }
     
-    var message: String?{
-        willSet{
+    var message: String? {
+        willSet {
             if newValue?.count ?? 0 == 0 {
-                messageTextView!.snp.remakeConstraints() { (ConstraintMaker) in
-                    ConstraintMaker.left.equalToSuperview().offset(15)
-                    ConstraintMaker.right.equalToSuperview().offset(-15)
-                    ConstraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(0)
-                    ConstraintMaker.height.greaterThanOrEqualTo(0)
+                messageTextView!.snp.remakeConstraints { (constraintMaker) in
+                    constraintMaker.left.equalToSuperview().offset(15)
+                    constraintMaker.right.equalToSuperview().offset(-15)
+                    constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(0)
+                    constraintMaker.height.greaterThanOrEqualTo(0)
                 }
             }
         }
-        didSet{
+        didSet {
             messageTextView?.text = message
-            messageTextView?.textContainerInset = configuration!.messageTextInset;
+            messageTextView?.textContainerInset = configuration!.messageTextInset
         }
     }
     
@@ -69,22 +69,22 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
 
     var contentViewHeight: CGFloat?
 
-    var contentView: UIView?{
-        didSet{
+    var contentView: UIView? {
+        didSet {
             if contentView == nil {
                 return
             }
             
-            if contentViewHeight == nil,contentViewHeight ?? 0 <= 0 {
+            if contentViewHeight == nil, contentViewHeight ?? 0 <= 0 {
                 contentViewHeight = 250
             }
 
             contentViewContainerView?.addSubview(contentView!)
-            contentViewContainerView?.snp.updateConstraints { (ConstraintMaker) in
-                ConstraintMaker.height.greaterThanOrEqualTo(contentViewHeight!)
+            contentViewContainerView?.snp.updateConstraints { (constraintMaker) in
+                constraintMaker.height.greaterThanOrEqualTo(contentViewHeight!)
             }
-            contentView?.snp.makeConstraints({ (ConstraintMaker) in
-                ConstraintMaker.edges.equalToSuperview()
+            contentView?.snp.makeConstraints({ (constraintMaker) in
+                constraintMaker.edges.equalToSuperview()
             })
 
 
@@ -93,10 +93,10 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
         }
     }
     
-    var actionButtons: Array<UIView>?{
+    var actionButtons: [UIView]? {
         
-        didSet{
-            for view :UIView in actionButtonStackView!.arrangedSubviews {
+        didSet {
+            for view: UIView in actionButtonStackView!.arrangedSubviews {
                 view.removeFromSuperview()
             }
 
@@ -107,32 +107,32 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
             
             separatorView?.isHidden = false
             
-            for index :Int in 0..<actionButtons!.count {
-                if configuration?.alertActionsViewBtnBackgroundColors.count ?? 0 > index  {
+            for index: Int in 0..<actionButtons!.count {
+                if configuration?.alertActionsViewBtnBackgroundColors.count ?? 0 > index {
                     actionButtons?[index].backgroundColor = configuration?.alertActionsViewBtnBackgroundColors[index]
-                }else{
+                } else {
                     actionButtons?[index].backgroundColor = UIColor.white
                 }
 
-                var actionButtonContainerViewHeight :CGFloat = 40.0
+                var actionButtonContainerViewHeight: CGFloat = 40.0
                 if actionButtons!.count <= 2 {
                     actionButtonContainerViewHeight = 40.0
                     actionButtonStackView?.axis = NSLayoutConstraint.Axis.horizontal
                     actionButtonStackView?.alignment = UIStackView.Alignment.fill
                     actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
-                }else{
+                } else {
                     actionButtonContainerViewHeight = 40.0 * CGFloat(actionButtons!.count)
                     actionButtonStackView?.axis = NSLayoutConstraint.Axis.vertical
                     actionButtonStackView?.alignment = UIStackView.Alignment.fill
                     actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
                 }
                 
-                actionButtonContainerView?.snp.remakeConstraints { (ConstraintMaker) in
-                    ConstraintMaker.left.equalToSuperview()
-                    ConstraintMaker.right.equalToSuperview()
-                    ConstraintMaker.top.equalTo(textFieldContainerView!.snp_bottom).offset(15)
-                    ConstraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
-                    ConstraintMaker.bottom.equalToSuperview()
+                actionButtonContainerView?.snp.remakeConstraints { (constraintMaker) in
+                    constraintMaker.left.equalToSuperview()
+                    constraintMaker.right.equalToSuperview()
+                    constraintMaker.top.equalTo(textFieldContainerView!.snp_bottom).offset(15)
+                    constraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
+                    constraintMaker.bottom.equalToSuperview()
                 }
                 
                 actionButtons?[index].setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
@@ -141,39 +141,39 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
         }
     }
     
-    var textFields: Array<UITextField>?{
+    var textFields: [UITextField]? {
 
-        didSet{
-            for textField :UITextField in textFields! {
+        didSet {
+            for textField: UITextField in textFields! {
                 textField.removeFromSuperview()
             }
 
             var topOffset = 0
-            for index :NSInteger in 0..<textFields!.count {
-                let textField :UITextField = textFields![index]
-                textField.translatesAutoresizingMaskIntoConstraints = false;
+            for index: NSInteger in 0..<textFields!.count {
+                let textField: UITextField = textFields![index]
+                textField.translatesAutoresizingMaskIntoConstraints = false
                 self.textFieldContainerView?.addSubview(textField)
                 
                 topOffset = 10 + index*(40 + 5)
                 
-                textField.snp.makeConstraints { (ConstraintMaker) in
-                    ConstraintMaker.left.right.equalToSuperview()
-                    ConstraintMaker.top.equalToSuperview().offset(topOffset)
-                    ConstraintMaker.height.equalTo(40)
+                textField.snp.makeConstraints { (constraintMaker) in
+                    constraintMaker.left.right.equalToSuperview()
+                    constraintMaker.top.equalToSuperview().offset(topOffset)
+                    constraintMaker.height.equalTo(40)
                 }
             }
 
-            self.textFieldContainerView?.snp.remakeConstraints({ (ConstraintMaker) in
-                ConstraintMaker.left.equalToSuperview().offset(15)
-                ConstraintMaker.right.equalToSuperview().offset(-15)
-                ConstraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
-                ConstraintMaker.height.greaterThanOrEqualTo(10+40+(40+5)*(textFields!.count-1)+10)
+            self.textFieldContainerView?.snp.remakeConstraints({ (constraintMaker) in
+                constraintMaker.left.equalToSuperview().offset(15)
+                constraintMaker.right.equalToSuperview().offset(-15)
+                constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
+                constraintMaker.height.greaterThanOrEqualTo(10+40+(40+5)*(textFields!.count-1)+10)
             })
         }
     }
     
-    var textViewUserInteractionEnabled: Bool?{
-        didSet{
+    var textViewUserInteractionEnabled: Bool? {
+        didSet {
             self.messageTextView?.isUserInteractionEnabled = textViewUserInteractionEnabled ?? false
         }
     }
@@ -187,19 +187,19 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
         
         self.configuration = configuration
         
-        maximumWidth = UIScreen.main.bounds.size.width - 40;
+        maximumWidth = UIScreen.main.bounds.size.width - 40
 
-        //backgroundContainerView
-        backgroundContainerView = UIView(frame: CGRect.zero);
-        backgroundContainerView?.clipsToBounds = true;
-        backgroundContainerView?.layer.cornerRadius = configuration.alertViewCornerRadius;
-        backgroundContainerView?.backgroundColor = configuration.alertContainerViewBackgroundColor;
-        backgroundContainerView?.translatesAutoresizingMaskIntoConstraints = false;
+        // backgroundContainerView
+        backgroundContainerView = UIView(frame: CGRect.zero)
+        backgroundContainerView?.clipsToBounds = true
+        backgroundContainerView?.layer.cornerRadius = configuration.alertViewCornerRadius
+        backgroundContainerView?.backgroundColor = configuration.alertContainerViewBackgroundColor
+        backgroundContainerView?.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundContainerView!)
         
-        //titleLabel
+        // titleLabel
         titleLabel = ADAlertTitleLabel(frame: CGRect.zero)
-        //        _titleLabel.textInset = UIEdgeInsetsMake(20, 0, 10, 0);
+        //        _titleLabel.textInset = UIEdgeInsetsMake(20, 0, 10, 0)
         titleLabel?.contentCompressionResistancePriority(for: NSLayoutConstraint.Axis.vertical)
         titleLabel?.numberOfLines = 2
         if configuration.titleFont != nil {
@@ -210,7 +210,7 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(titleLabel!)
 
-        //messageTextView
+        // messageTextView
         messageTextView = ADAlertTextView(frame: CGRect.zero)
         messageTextView?.setContentHuggingPriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
         messageTextView?.contentCompressionResistancePriority(for: NSLayoutConstraint.Axis.vertical)
@@ -229,32 +229,32 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
         messageTextView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(messageTextView!)
 
-        //contentViewContainerView
+        // contentViewContainerView
         contentViewContainerView = UIView(frame: CGRect.zero)
         contentViewContainerView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(contentViewContainerView!)
 
-        //contentViewContainerView
+        // contentViewContainerView
         textFieldContainerView = UIView(frame: CGRect.zero)
         textFieldContainerView? .setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
         textFieldContainerView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(textFieldContainerView!)
 
-        //actionButtonContainerView
+        // actionButtonContainerView
         actionButtonContainerView = UIView(frame: CGRect.zero)
         actionButtonContainerView? .setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
         actionButtonContainerView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(actionButtonContainerView!)
 
-        //actionButtonStackView
-        actionButtonStackView = UIStackView();
+        // actionButtonStackView
+        actionButtonStackView = UIStackView()
         actionButtonStackView?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
-        actionButtonStackView?.spacing = 0.0;
+        actionButtonStackView?.spacing = 0.0
         actionButtonContainerView?.addSubview(actionButtonStackView!)
 
-        //分割线
+        // 分割线
         if configuration.showsSeparators == true {
-            actionButtonStackView?.spacing = 0.5;
+            actionButtonStackView?.spacing = 0.5
             actionButtonStackView!.backgroundColor = configuration.separatorColor
             separatorView = UIView()
             separatorView?.backgroundColor = configuration.separatorColor
@@ -272,80 +272,80 @@ class ADAlertView: UIView,ADAlertControllerViewProtocol {
     }
     
     func layoutView() {
-//        backgroundContainerView?.backgroundColor = UIColor.white;
-//        titleLabel?.backgroundColor = UIColor.gray;
-//        messageTextView?.backgroundColor = UIColor.gray;
-//        contentViewContainerView?.backgroundColor = UIColor.gray;
-//        textFieldContainerView.backgroundColor = UIColor.gray;
-//        actionButtonContainerView.backgroundColor = UIColor.gray;
-//        actionButtonContainerView.backgroundColor = UIColor.gray;
-//        actionButtonStackView.backgroundColor = UIColor.green;
-//        separatorView?.backgroundColor = UIColor.gray;
+//        backgroundContainerView?.backgroundColor = UIColor.white
+//        titleLabel?.backgroundColor = UIColor.gray
+//        messageTextView?.backgroundColor = UIColor.gray
+//        contentViewContainerView?.backgroundColor = UIColor.gray
+//        textFieldContainerView.backgroundColor = UIColor.gray
+//        actionButtonContainerView.backgroundColor = UIColor.gray
+//        actionButtonContainerView.backgroundColor = UIColor.gray
+//        actionButtonStackView.backgroundColor = UIColor.green
+//        separatorView?.backgroundColor = UIColor.gray
 
-        //添加约束
-        self.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.centerX.equalToSuperview()
-            ConstraintMaker.centerY.equalToSuperview().offset(0)
-            ConstraintMaker.width.equalTo(UIScreen.main.bounds.width)
-            ConstraintMaker.height.equalToSuperview()
+        // 添加约束
+        self.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.centerX.equalToSuperview()
+            constraintMaker.centerY.equalToSuperview().offset(0)
+            constraintMaker.width.equalTo(UIScreen.main.bounds.width)
+            constraintMaker.height.equalToSuperview()
         }
         
-        backgroundContainerView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.centerX.equalToSuperview()
-            ConstraintMaker.width.equalTo(maximumWidth!)
-            ConstraintMaker.centerY.equalToSuperview()
-            ConstraintMaker.height.greaterThanOrEqualTo(15+20+15)
+        backgroundContainerView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.centerX.equalToSuperview()
+            constraintMaker.width.equalTo(maximumWidth!)
+            constraintMaker.centerY.equalToSuperview()
+            constraintMaker.height.greaterThanOrEqualTo(15+20+15)
         }
 
-        titleLabel?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.left.equalToSuperview().offset(15)
-            ConstraintMaker.right.equalToSuperview().offset(-15)
-            ConstraintMaker.top.equalToSuperview().offset(15)
-            ConstraintMaker.height.greaterThanOrEqualTo(0)
+        titleLabel?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.equalToSuperview().offset(15)
+            constraintMaker.right.equalToSuperview().offset(-15)
+            constraintMaker.top.equalToSuperview().offset(15)
+            constraintMaker.height.greaterThanOrEqualTo(0)
         }
 
-        messageTextView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.left.right.equalToSuperview()
-            ConstraintMaker.centerX.equalToSuperview()
-            ConstraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(15)
-            ConstraintMaker.height.greaterThanOrEqualTo(20)
+        messageTextView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.right.equalToSuperview()
+            constraintMaker.centerX.equalToSuperview()
+            constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(15)
+            constraintMaker.height.greaterThanOrEqualTo(20)
         }
 
-        contentViewContainerView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.left.equalToSuperview().offset(15)
-            ConstraintMaker.right.equalToSuperview().offset(-15)
-            ConstraintMaker.top.equalTo(messageTextView!.snp_bottom).offset(0)
-            ConstraintMaker.height.greaterThanOrEqualTo(0)
+        contentViewContainerView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.equalToSuperview().offset(15)
+            constraintMaker.right.equalToSuperview().offset(-15)
+            constraintMaker.top.equalTo(messageTextView!.snp_bottom).offset(0)
+            constraintMaker.height.greaterThanOrEqualTo(0)
         }
 
-        textFieldContainerView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.left.equalToSuperview().offset(15)
-            ConstraintMaker.right.equalToSuperview().offset(-15)
-            ConstraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
-            ConstraintMaker.height.greaterThanOrEqualTo(0)
+        textFieldContainerView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.equalToSuperview().offset(15)
+            constraintMaker.right.equalToSuperview().offset(-15)
+            constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
+            constraintMaker.height.greaterThanOrEqualTo(0)
         }
 
-        actionButtonContainerView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.left.equalToSuperview()
-            ConstraintMaker.right.equalToSuperview()
-            ConstraintMaker.top.equalTo(textFieldContainerView!.snp_bottom).offset(15)
-            ConstraintMaker.height.greaterThanOrEqualTo(40)
-            ConstraintMaker.bottom.equalToSuperview()
+        actionButtonContainerView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.equalToSuperview()
+            constraintMaker.right.equalToSuperview()
+            constraintMaker.top.equalTo(textFieldContainerView!.snp_bottom).offset(15)
+            constraintMaker.height.greaterThanOrEqualTo(40)
+            constraintMaker.bottom.equalToSuperview()
         }
 
-        actionButtonStackView?.snp.makeConstraints { (ConstraintMaker) in
-            ConstraintMaker.top.equalToSuperview().offset(0.5)
-            ConstraintMaker.left.equalToSuperview()
-            ConstraintMaker.right.equalToSuperview()
-            ConstraintMaker.bottom.equalToSuperview()
+        actionButtonStackView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.top.equalToSuperview().offset(0.5)
+            constraintMaker.left.equalToSuperview()
+            constraintMaker.right.equalToSuperview()
+            constraintMaker.bottom.equalToSuperview()
         }
 
-        if ((self.configuration?.showsSeparators) != nil) {
-            separatorView?.snp.makeConstraints { (ConstraintMaker) in
-                ConstraintMaker.left.equalToSuperview()
-                ConstraintMaker.right.equalToSuperview()
-                ConstraintMaker.top.equalToSuperview()
-                ConstraintMaker.height.equalTo(0.5)
+        if (self.configuration?.showsSeparators) != nil {
+            separatorView?.snp.makeConstraints { (constraintMaker) in
+                constraintMaker.left.equalToSuperview()
+                constraintMaker.right.equalToSuperview()
+                constraintMaker.top.equalToSuperview()
+                constraintMaker.height.equalTo(0.5)
             }
         }
         

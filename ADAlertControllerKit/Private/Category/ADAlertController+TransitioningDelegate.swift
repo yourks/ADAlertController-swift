@@ -7,45 +7,43 @@
 
 import UIKit
 
-@objc extension ADAlertController :UIViewControllerTransitioningDelegate {
+@objc extension ADAlertController: UIViewControllerTransitioningDelegate {
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         
-        let presentationController :ADAlertControllerPresentationController = ADAlertControllerPresentationController(presentedViewController: presented, presenting: presenting)
+        let presentationController: ADAlertControllerPresentationController = ADAlertControllerPresentationController(presentedViewController: presented, presenting: presenting)
         
-        presentationController.hidenWhenTapBackground = self.configuration?.hidenWhenTapBackground;
+        presentationController.hidenWhenTapBackground = self.configuration?.hidenWhenTapBackground
         
-        presentationController.backgroundColor = self.configuration?.alertMaskViewBackgroundColor;
+        presentationController.backgroundColor = self.configuration?.alertMaskViewBackgroundColor
         
-        return presentationController;
+        return presentationController
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleAlert {
             
-            let transition :ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
+            let transition: ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStylePresenting
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
             
-            return transition;
-        }
-        else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
+            return transition
+        } else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
             
-            let transition :ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
+            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStylePresenting
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
             
-            return transition;
-        }
-        else
+            return transition
+        } else
 //        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet
         {
-            let transition :ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
+            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStylePresenting
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
             
-            return transition;
+            return transition
         }
         
     }
@@ -54,28 +52,26 @@ import UIKit
         
         if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleAlert {
             
-            let transition :ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
+            let transition: ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStyleDismissing
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
             
-            return transition;
-        }
-        else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
+            return transition
+        } else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
             
-            let transition :ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
+            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStyleDismissing
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
             
-            return transition;
-        }
-        else
+            return transition
+        } else
 //        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet
         {
-            let transition :ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
+            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
             
-            transition.transitionStyle = ADAlertControllerTransitionStyle.ADAlertControllerTransitionStyleDismissing
+            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
             
-            return transition;
+            return transition
         }
     }
 }

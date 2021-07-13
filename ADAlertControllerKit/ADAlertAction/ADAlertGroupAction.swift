@@ -11,39 +11,39 @@ class ADAlertGroupAction: ADAlertAction {
 
     // MARK: - proprety/pubilc
     
-    //分割线颜色
-    public var separatorColor :UIColor?
-    //分割线是否显示
-    public var showsSeparators :Bool?
-    
+    // 分割线颜色
+    public var separatorColor: UIColor?
+    // 分割线是否显示
+    public var showsSeparators: Bool?
+
     
     // MARK: - proprety/private
     
-    //Array ADAlertAction
-    private var actions :Array<ADAlertAction>?
+    // Array ADAlertAction
+    private var actions: [ADAlertAction]?
     
-    //UIStackView
-    private var actionButtonStackView :UIStackView?
+    // UIStackView
+    private var actionButtonStackView: UIStackView?
 
-    //重写viewController
-    internal override var viewController: UIViewController?{
-        didSet{
+    // 重写viewController
+    internal override var viewController: UIViewController? {
+        didSet {
             for action in self.actions! {
-                action.viewController = viewController;
+                action.viewController = viewController
             }
         }
     }
     
-    //MARK: - func init
+    // MARK: - func init
     override init() {
         super.init()
     }
     
-    //MARK: - static func
-    static func groupActionWithActions(actions :Array <ADAlertAction>) -> ADAlertGroupAction {
+    // MARK: - static func
+    static func groupActionWithActions(actions: [ADAlertAction]) -> ADAlertGroupAction {
                 
-        var condition :Bool = false
-        var message :String = ""
+        var condition: Bool = false
+        var message: String = ""
         if actions.count == 0 {
             condition = true
             message = "Tried to initialize ADAlertGroupAction with less than one action."
@@ -61,41 +61,41 @@ class ADAlertGroupAction: ADAlertAction {
             }
         }
 
-        if condition == true , message.count > 0{
+        if condition == true, message.count > 0 {
             precondition(condition, message)
         }
         
-        let groupAction :ADAlertGroupAction = ADAlertGroupAction()
-        groupAction.actions = actions;
+        let groupAction: ADAlertGroupAction = ADAlertGroupAction()
+        groupAction.actions = actions
         
-        //FIXME: NSException
+        // FIXME: NSException
 //        seperatorView.backgroundColor = separatorColor
 
 //        groupAction.handler
 //        [groupedAction setHandler:^(ADAlertAction *controller) {
-//            [NSException raise:@"ADInconsistencyException" format:@"The handler of a grouped action has been called."];
-//        }];
+//            [NSException raise:@"ADInconsistencyException" format:@"The handler of a grouped action has been called."]
+//        }]
 
         return groupAction
     }
     
-    //MARK: - override func
+    // MARK: - override func
     override public func loadView() -> UIView {
         
-        let view :UIView = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false;
-        view.backgroundColor = UIColor.clear;
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.clear
 
-        if (self.showsSeparators == true) {
-            view.backgroundColor = separatorColor;
+        if self.showsSeparators == true {
+            view.backgroundColor = separatorColor
         }
 
-        self.actionButtonStackView = UIStackView();
+        self.actionButtonStackView = UIStackView()
         self.actionButtonStackView?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
-        self.actionButtonStackView?.spacing = 0.0;
+        self.actionButtonStackView?.spacing = 0.0
         view.addSubview(self.actionButtonStackView!)
-        self.actionButtonStackView?.snp.makeConstraints({ (ConstraintMaker) in
-            ConstraintMaker.edges.equalToSuperview()
+        self.actionButtonStackView?.snp.makeConstraints({ (constraintMaker) in
+            constraintMaker.edges.equalToSuperview()
         })
         
         actionButtonStackView?.axis = NSLayoutConstraint.Axis.horizontal
@@ -103,21 +103,21 @@ class ADAlertGroupAction: ADAlertAction {
         actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
         self.actionButtonStackView?.layoutIfNeeded()
 
-        for action :ADAlertAction in self.actions! {
+        for action: ADAlertAction in self.actions! {
             self.actionButtonStackView!.addArrangedSubview(action.loadView())
         }
 
-        return view;
+        return view
     }
     
-    //FIXME: NSException
-    //MARK: - func overriride
+    // FIXME: NSException
+    // MARK: - func overriride
     //https://www.jianshu.com/p/84edfd5b30dd/
     //https://www.jianshu.com/p/87fb293a70b8?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
     //http://www.zyiz.net/tech/detail-117055.html
 //    + (instancetype)actionWithTitle:(NSString *)title image:(UIImage *)image style:(ADActionStyle)style handler:(ADAlertActionHandler)handler{
-//        [NSException raise:@"ADAlertGroupActionCallException" format:@"Tried to initialize a grouped action with +[%@ %@]. Please use +[%@ %@] instead.", NSStringFromClass(self), NSStringFromSelector(_cmd), NSStringFromClass(self), NSStringFromSelector(@selector(groupActionWithActions:))];
-//        return nil;
+//        [NSException raise:@"ADAlertGroupActionCallException" format:@"Tried to initialize a grouped action with +[%@ %@]. Please use +[%@ %@] instead.", NSStringFromClass(self), NSStringFromSelector(_cmd), NSStringFromClass(self), NSStringFromSelector(@selector(groupActionWithActions:))]
+//        return nil
 //    }
 
     

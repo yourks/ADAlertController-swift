@@ -8,6 +8,6 @@
 import UIKit
 
 class ADScrollableGroupAction: ADAlertGroupAction {
-    //FIXME: ADScrollableGroupAction
+    // FIXME: ADScrollableGroupAction
 
 }

@@ -9,17 +9,16 @@ import UIKit
 
 extension UIImage {
     
-    //MARK: - public func
+    // MARK: - public func
     
-    public static func ad_imageWithTheColor(color :UIColor) -> UIImage {
-        let rect :CGRect = CGRect.init(x: 0, y: 0, width: 1, height: 1)
+    public static func ad_imageWithTheColor(color: UIColor) -> UIImage {
+        let rect: CGRect = CGRect.init(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         color.setFill()
         UIRectFill(rect)
-        let image :UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
-    
     
 }

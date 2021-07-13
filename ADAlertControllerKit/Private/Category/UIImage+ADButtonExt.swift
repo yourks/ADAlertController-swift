@@ -6,9 +6,9 @@
 //
 
 import UIKit
-// 如果某个枚举只在自己模块内使用,可以不用前缀
 
-enum ButtonImagePosition :Int {
+// 如果某个枚举只在自己模块内使用,可以不用前缀
+enum ButtonImagePosition: Int {
     // 图片在左，文字在右，默认
     case left = 0
     // 图片在右，文字在左
@@ -29,50 +29,53 @@ enum ButtonImagePosition :Int {
 
 extension UIButton {
     
-    //MARK: - public func
-    
-    // 设置UIButton中图片在文字的什么位置
-    func setImagePosition(postion: ButtonImagePosition , spacing: CGFloat) -> Void {
+    // MARK: - public func
 
-        let title :NSString = self.title(for: UIControl.State.normal)! as NSString
+    // 设置UIButton中图片在文字的什么位置
+    // swiftlint:disable function_body_length
+    func setImagePosition(postion: ButtonImagePosition, spacing: CGFloat) {
+        // swiftlint:enable function_body_length
+
+        let title: NSString = self.title(for: UIControl.State.normal)! as NSString
         
         if self.isSelected == true {
             self.setImage(self.currentImage, for: UIControl.State.selected)
-        }else{
+        } else {
             self.setImage(self.currentImage, for: UIControl.State.normal)
         }
-        let imageWidth :CGFloat = self.imageView?.image?.size.width ?? 1
-        let imageHeight :CGFloat = self.imageView?.image?.size.height ?? 1
+        let imageWidth: CGFloat = self.imageView?.image?.size.width ?? 1
+        let imageHeight: CGFloat = self.imageView?.image?.size.height ?? 1
 
-        var labelWidth :CGFloat = title.size(withAttributes: [NSAttributedString.Key.font : self.titleLabel?.font as Any]).width
-        let labelHeight :CGFloat = title.size(withAttributes: [NSAttributedString.Key.font : self.titleLabel?.font as Any]).height
+        var labelWidth: CGFloat = title.size(withAttributes: [NSAttributedString.Key.font: self.titleLabel?.font ?? UIFont.systemFont(ofSize: 14)]).width
+        let labelHeight: CGFloat = title.size(withAttributes: [NSAttributedString.Key.font: self.titleLabel?.font ?? UIFont.systemFont(ofSize: 14)]).height
         
         if postion.isHorizontal {
-            if self.frame.size.width - imageWidth < labelWidth{
+            if self.frame.size.width - imageWidth < labelWidth {
                 labelWidth = self.frame.size.width - imageWidth
             }
         }
         
-        let imageOffsetX :CGFloat = (imageWidth + labelWidth) / 2 - imageWidth / 2
-        let imageOffsetY :CGFloat = imageHeight / 2 + spacing / 2
-        let labelOffsetX :CGFloat = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2
-        let labelOffsetY :CGFloat = labelHeight / 2 + spacing / 2
+        let imageOffsetX: CGFloat = (imageWidth + labelWidth) / 2 - imageWidth / 2
+        let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
+        let labelOffsetX: CGFloat = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2
+        let labelOffsetY: CGFloat = labelHeight / 2 + spacing / 2
 
-        var tempWidth :CGFloat
+        var tempWidth: CGFloat
         if labelWidth >  imageWidth {
             tempWidth = labelWidth
-        }else{
+        } else {
             tempWidth = imageWidth
         }
-        let changedWidth :CGFloat = labelWidth + imageWidth - tempWidth
-        var tempHeight :CGFloat
+
+        var tempHeight: CGFloat
         if labelHeight >  imageHeight {
             tempHeight = labelHeight
-        }else{
+        } else {
             tempHeight = imageHeight
         }
-
-        let changedHeight :CGFloat = labelHeight + imageHeight + spacing - tempHeight
+        
+        let changedWidth: CGFloat = labelWidth + imageWidth - tempWidth
+        let changedHeight: CGFloat = labelHeight + imageHeight + spacing - tempHeight
 
         switch postion {
         case .left:
@@ -88,7 +91,7 @@ extension UIButton {
                                                   left: spacing/2,
                                                   bottom: 0,
                                                   right: spacing/2)
-            break
+            
         case .right:
             self.imageEdgeInsets = UIEdgeInsets(top: 0,
                                                 left: labelWidth + spacing/2,
@@ -102,7 +105,6 @@ extension UIButton {
                                                   left: spacing/2,
                                                   bottom: 0,
                                                   right: spacing/2)
-            break;
             
         case .top:
             self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY,
@@ -117,7 +119,6 @@ extension UIButton {
                                                   left: -changedWidth/2,
                                                   bottom: changedHeight-imageOffsetY,
                                                   right: -changedWidth/2)
-            break;
 
         case .bottom:
             self.imageEdgeInsets = UIEdgeInsets(top: imageOffsetY,
@@ -132,11 +133,9 @@ extension UIButton {
                                                   left: -changedWidth/2,
                                                   bottom: imageOffsetY,
                                                   right: -changedWidth/2)
-            break;
+            
         }
 
-
     }
-
     
 }

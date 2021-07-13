@@ -11,12 +11,12 @@ class ADAlertControllerConfiguration: NSObject {
     /**
      alertController 类型,默认 alert类型
      */
-    var preferredStyle :ADAlertControllerStyle = ADAlertControllerStyle.ADAlertControllerStyleAlert
-    //ADAlertControllerStyle.Alert
+    var preferredStyle: ADAlertControllerStyle = ADAlertControllerStyle.ADAlertControllerStyleAlert
+    // ADAlertControllerStyle.Alert
     /**
      点击背景是否关闭警告框视图,默认 NO
      */
-    var hidenWhenTapBackground :Bool = false
+    var hidenWhenTapBackground: Bool = false
     /**
      针对 alert 类型视图,是否允许手势滑动关闭警告框视图,默认 NO
      */
@@ -44,7 +44,7 @@ class ADAlertControllerConfiguration: NSObject {
     /**
      按钮背景色 ActionsView
      */
-    var alertActionsViewBtnBackgroundColors: Array<UIColor> = Array()
+    var alertActionsViewBtnBackgroundColors: [UIColor] = Array()
 
     /**
      内容容器视图圆角,默认4
@@ -62,7 +62,7 @@ class ADAlertControllerConfiguration: NSObject {
     var messageTextColor: UIColor = UIColor.black
 
     /**
-     在按钮周围是否显示分割线,默认 NO  按钮间的showsSeparators 可以通过 控制actionButtonStackView?.spacing = 0.0; 来控制
+     在按钮周围是否显示分割线,默认 NO  按钮间的showsSeparators 可以通过 控制actionButtonStackView?.spacing = 0.0 来控制
      */
     var showsSeparators: Bool = false
 
@@ -98,12 +98,12 @@ class ADAlertControllerConfiguration: NSObject {
 
 
     // MARK: - 初始化方法
-    private override init(){
+    private override init() {
         super.init()
     }
     
-    init(preferredStyle :ADAlertControllerStyle) {
-        self.preferredStyle = preferredStyle;
+    init(preferredStyle: ADAlertControllerStyle) {
+        self.preferredStyle = preferredStyle
     }
 
     /**
@@ -112,22 +112,22 @@ class ADAlertControllerConfiguration: NSObject {
      @param preferredStyle alertview类型
      @return 默认配置对象
      */
-    static  func defaultConfigurationWithPreferredStyle(preferredStyle :ADAlertControllerStyle) -> ADAlertControllerConfiguration{
+    static  func defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle) -> ADAlertControllerConfiguration {
         
-        let config :ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: preferredStyle)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: preferredStyle)
         
-        config.alertContainerViewBackgroundColor = UIColor.white;
-        config.alertMaskViewBackgroundColor = UIColor.black.withAlphaComponent(0.5);
+        config.alertContainerViewBackgroundColor = UIColor.white
+        config.alertMaskViewBackgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        if (preferredStyle != ADAlertControllerStyle.ADAlertControllerStyleSheet) {
-            config.alertViewCornerRadius = 4;
+        if preferredStyle != ADAlertControllerStyle.ADAlertControllerStyleSheet {
+            config.alertViewCornerRadius = 4
         }
         
-        config.separatorColor = UIColor.lightGray;
+        config.separatorColor = UIColor.lightGray
         config.titleFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
         config.messageFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 
-        return config;
+        return config
     }
 
 

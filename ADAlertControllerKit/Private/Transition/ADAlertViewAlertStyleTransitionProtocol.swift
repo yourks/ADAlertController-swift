@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ADAlertViewAlertStyleTransitionProtocol :NSObject{
-    //移动超出屏幕
+protocol ADAlertViewAlertStyleTransitionProtocol: NSObject {
+    // 移动超出屏幕
     var moveoutScreen: Bool? { get set }
 }
