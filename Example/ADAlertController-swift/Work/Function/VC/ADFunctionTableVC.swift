@@ -116,7 +116,7 @@ extension ADFunctionTableVC {
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "这里是标题", message: "", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration(preferredStyle: .alert), title: "这里是标题", message: "", actions: [cancelAction, sureAction])
 
         alertView.show()
         
@@ -132,7 +132,7 @@ extension ADFunctionTableVC {
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "", message: "这里是内容", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert), title: "", message: "这里是内容", actions: [cancelAction, sureAction])
 
         alertView.show()
         
@@ -148,7 +148,7 @@ extension ADFunctionTableVC {
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "这里是标题", message: "这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容里是内容这里是内容这里是内容", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert), title: "这里是标题", message: "这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容", actions: [cancelAction, sureAction])
 
         alertView.show()
         
