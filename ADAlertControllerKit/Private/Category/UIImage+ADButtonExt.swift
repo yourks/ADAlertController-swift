@@ -27,115 +27,96 @@ enum ButtonImagePosition: Int {
     }
 }
 
+extension CGSize {
+    mutating func resetWidth(_ width: CGFloat) {
+        self = CGSize(width: width, height: self.height)
+    }
+}
+
 extension UIButton {
+    
+    fileprivate typealias ButtonEdgeInsets = (image: UIEdgeInsets, title: UIEdgeInsets, content: UIEdgeInsets)
     
     // MARK: - public func
 
     // 设置UIButton中图片在文字的什么位置
-    // swiftlint:disable function_body_length
     func setImagePosition(postion: ButtonImagePosition, spacing: CGFloat) {
-        // swiftlint:enable function_body_length
-
-        let title: NSString = self.title(for: UIControl.State.normal)! as NSString
         
-        if self.isSelected == true {
-            self.setImage(self.currentImage, for: UIControl.State.selected)
+        guard let title = self.title(for: .normal) else { return }
+                
+        if self.isSelected {
+            self.setImage(self.currentImage, for: .selected)
         } else {
-            self.setImage(self.currentImage, for: UIControl.State.normal)
+            self.setImage(self.currentImage, for: .normal)
         }
-        let imageWidth: CGFloat = self.imageView?.image?.size.width ?? 1
-        let imageHeight: CGFloat = self.imageView?.image?.size.height ?? 1
-
-        var labelWidth: CGFloat = title.size(withAttributes: [NSAttributedString.Key.font: self.titleLabel?.font ?? UIFont.systemFont(ofSize: 14)]).width
-        let labelHeight: CGFloat = title.size(withAttributes: [NSAttributedString.Key.font: self.titleLabel?.font ?? UIFont.systemFont(ofSize: 14)]).height
+        let imageSize = self.imageView?.image?.size ?? CGSize(width: 1, height: 1)
+        let font = self.titleLabel?.font ?? UIFont.systemFont(ofSize: 12)
+        var titleSize = title.size(withAttributes: [NSAttributedString.Key.font: font])
         
         if postion.isHorizontal {
-            if self.frame.size.width - imageWidth < labelWidth {
-                labelWidth = self.frame.size.width - imageWidth
+            if self.frame.size.width - imageSize.width < titleSize.width {
+                titleSize.resetWidth(self.frame.size.width - imageSize.width)
             }
         }
         
-        let imageOffsetX: CGFloat = (imageWidth + labelWidth) / 2 - imageWidth / 2
-        let imageOffsetY: CGFloat = imageHeight / 2 + spacing / 2
-        let labelOffsetX: CGFloat = (imageWidth + labelWidth / 2) - (imageWidth + labelWidth) / 2
-        let labelOffsetY: CGFloat = labelHeight / 2 + spacing / 2
-
-        var tempWidth: CGFloat
-        if labelWidth >  imageWidth {
-            tempWidth = labelWidth
-        } else {
-            tempWidth = imageWidth
-        }
-
-        var tempHeight: CGFloat
-        if labelHeight >  imageHeight {
-            tempHeight = labelHeight
-        } else {
-            tempHeight = imageHeight
-        }
+        let edgeinsets = self .makeEdgeInsets(postion, spacing, imageSize, titleSize)
+        self.imageEdgeInsets = edgeinsets.image
+        self.titleEdgeInsets = edgeinsets.title
+        self.contentEdgeInsets = edgeinsets.content
+    }
+    
+    fileprivate func makeEdgeInsets(_ postion: ButtonImagePosition, _ spacing: CGFloat, _ imageSize: CGSize, _ titleSize: CGSize) -> ButtonEdgeInsets {
         
-        let changedWidth: CGFloat = labelWidth + imageWidth - tempWidth
-        let changedHeight: CGFloat = labelHeight + imageHeight + spacing - tempHeight
-
+        let imageOffsetX: CGFloat = (imageSize.width + titleSize.width) * 0.5 - imageSize.width * 0.5
+        let imageOffsetY: CGFloat = imageSize.height * 0.5 + spacing * 0.5
+        let labelOffsetX: CGFloat = (imageSize.width + titleSize.width * 0.5) - (imageSize.width + titleSize.width) * 0.5
+        let labelOffsetY: CGFloat = titleSize.height * 0.5 + spacing * 0.5
+        
+        let tempWidth = max(titleSize.width, imageSize.width)
+        let tempHeight = max(titleSize.height, imageSize.height)
+        
+        let changedWidth: CGFloat = titleSize.width + imageSize.width - tempWidth
+        let changedHeight: CGFloat = titleSize.height + imageSize.height + spacing - tempHeight
+        let labelWidth = titleSize.width
+        let imageWidth = imageSize.width
+        
         switch postion {
         case .left:
-            self.imageEdgeInsets = UIEdgeInsets(top: 0,
-                                                left: -spacing/2,
-                                                bottom: 0,
-                                                right: spacing/2)
-            self.titleEdgeInsets = UIEdgeInsets(top: 0,
-                                                left: spacing/2,
-                                                bottom: 0,
-                                                right: -spacing/2)
-            self.contentEdgeInsets = UIEdgeInsets(top: 0,
-                                                  left: spacing/2,
-                                                  bottom: 0,
-                                                  right: spacing/2)
+            return (image: UIEdgeInsets(top: 0, left: -spacing * 0.5, bottom: 0, right: spacing * 0.5),
+                    title: UIEdgeInsets(top: 0, left: spacing * 0.5, bottom: 0, right: -spacing * 0.5),
+                    content: UIEdgeInsets(top: 0, left: spacing * 0.5, bottom: 0, right: spacing * 0.5))
             
         case .right:
-            self.imageEdgeInsets = UIEdgeInsets(top: 0,
-                                                left: labelWidth + spacing/2,
-                                                bottom: 0,
-                                                right: -(labelWidth + spacing/2))
-            self.titleEdgeInsets = UIEdgeInsets(top: 0,
-                                                left: -(imageWidth + spacing/2),
-                                                bottom: 0,
-                                                right: imageWidth + spacing/2)
-            self.contentEdgeInsets = UIEdgeInsets(top: 0,
-                                                  left: spacing/2,
-                                                  bottom: 0,
-                                                  right: spacing/2)
+            return (image: UIEdgeInsets(top: 0, left: labelWidth + spacing * 0.5,
+                                        bottom: 0, right: -(labelWidth + spacing * 0.5)),
+                    title:  UIEdgeInsets(top: 0, left: -(imageWidth + spacing * 0.5),
+                                         bottom: 0, right: imageWidth + spacing * 0.5),
+                    content: UIEdgeInsets(top: 0, left: spacing * 0.5, bottom: 0, right: spacing * 0.5))
             
         case .top:
-            self.imageEdgeInsets = UIEdgeInsets(top: -imageOffsetY,
-                                                left: imageOffsetX,
-                                                bottom: imageOffsetY,
-                                                right: -imageOffsetX)
-            self.titleEdgeInsets = UIEdgeInsets(top: labelOffsetY,
-                                                left: -labelOffsetX,
-                                                bottom: -labelOffsetY,
-                                                right: labelOffsetX)
-            self.contentEdgeInsets = UIEdgeInsets(top: imageOffsetY,
-                                                  left: -changedWidth/2,
-                                                  bottom: changedHeight-imageOffsetY,
-                                                  right: -changedWidth/2)
-
+            return (image: UIEdgeInsets(top: -imageOffsetY, left: imageOffsetX,
+                                        bottom: imageOffsetY, right: -imageOffsetX),
+                    title: UIEdgeInsets(top: labelOffsetY, left: -labelOffsetX,
+                                        bottom: -labelOffsetY, right: labelOffsetX),
+                    content: UIEdgeInsets(top: imageOffsetY, left: -changedWidth * 0.5,
+                                          bottom: changedHeight-imageOffsetY,
+                                          right: -changedWidth * 0.5))
+            
         case .bottom:
-            self.imageEdgeInsets = UIEdgeInsets(top: imageOffsetY,
-                                                left: imageOffsetX,
-                                                bottom: -imageOffsetY,
-                                                right: -imageOffsetX)
-            self.titleEdgeInsets = UIEdgeInsets(top: -labelOffsetY,
-                                                left: -labelOffsetX,
-                                                bottom: labelOffsetY,
-                                                right: labelOffsetX)
-            self.contentEdgeInsets = UIEdgeInsets(top: changedHeight-imageOffsetY,
-                                                  left: -changedWidth/2,
-                                                  bottom: imageOffsetY,
-                                                  right: -changedWidth/2)
+            return (image: UIEdgeInsets(top: imageOffsetY,
+                                        left: imageOffsetX,
+                                        bottom: -imageOffsetY,
+                                        right: -imageOffsetX),
+                    title:  UIEdgeInsets(top: -labelOffsetY,
+                                         left: -labelOffsetX,
+                                         bottom: labelOffsetY,
+                                         right: labelOffsetX),
+                    content: UIEdgeInsets(top: changedHeight-imageOffsetY,
+                                          left: -changedWidth * 0.5,
+                                          bottom: imageOffsetY,
+                                          right: -changedWidth * 0.5))
             
         }
-
     }
     
 }
