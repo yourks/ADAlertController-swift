@@ -232,7 +232,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         titleLabel = ADAlertTitleLabel(frame: CGRect.zero)
         titleLabel?.contentCompressionResistancePriority(for: NSLayoutConstraint.Axis.vertical)
         titleLabel?.numberOfLines = 2
-        if configuration.titleFont != nil { titleLabel?.font = configuration.titleFont }
+        titleLabel?.font = configuration.titleFont
         titleLabel?.textAlignment = NSTextAlignment.center
         titleLabel?.textColor = configuration.titleTextColor
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
@@ -245,7 +245,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         messageTextView?.backgroundColor = UIColor.clear
         messageTextView?.isEditable = false
         messageTextView?.isSelectable = false
-        if configuration.messageFont != nil { messageTextView?.font = configuration.messageFont }
+        messageTextView?.font = configuration.messageFont
         messageTextView?.font = UIFont.systemFont(ofSize: 15)
         messageTextView?.textContainer.lineFragmentPadding = 0.0
         messageTextView?.textContainerInset = UIEdgeInsets.zero

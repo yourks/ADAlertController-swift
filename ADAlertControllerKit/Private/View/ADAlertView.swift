@@ -212,9 +212,7 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
         //        _titleLabel.textInset = UIEdgeInsetsMake(20, 0, 10, 0)
         titleLabel?.contentCompressionResistancePriority(for: NSLayoutConstraint.Axis.vertical)
         titleLabel?.numberOfLines = 2
-        if configuration.titleFont != nil {
-            titleLabel?.font = configuration.titleFont
-        }
+        titleLabel?.font = configuration.titleFont
         titleLabel?.textAlignment = NSTextAlignment.center
         titleLabel?.textColor = configuration.titleTextColor
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
@@ -227,10 +225,7 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
         messageTextView?.backgroundColor = UIColor.clear
         messageTextView?.isEditable = false
         messageTextView?.isSelectable = false
-        if configuration.messageFont != nil {
-            messageTextView?.font = configuration.messageFont
-        }
-        messageTextView?.font = UIFont.systemFont(ofSize: 15)
+        messageTextView?.font = configuration.messageFont
         messageTextView?.textContainer.lineFragmentPadding = 0.0
         messageTextView?.textContainerInset = UIEdgeInsets.zero
         
