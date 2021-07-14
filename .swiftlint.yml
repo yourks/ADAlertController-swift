@@ -9,11 +9,11 @@ disabled_rules:
     - trailing_whitespace
     - trailing_newline
     - vertical_whitespace
-    - implicit_getter
-    - type_body_length
-    - function_body_length
-    - file_length
-    - no_fallthrough_only
+#    - implicit_getter
+#    - type_body_length
+#    - function_body_length
+#    - file_length
+#    - no_fallthrough_only
 
 force_cast: warning
 # 隐式

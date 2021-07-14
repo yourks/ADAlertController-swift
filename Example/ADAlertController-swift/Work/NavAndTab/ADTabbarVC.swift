@@ -23,8 +23,6 @@ class ADTabbarVC: ADBaseTabBarVC {
          addChild(ADNavVC(rootViewController: childController))
      }
      */
-    
-
     // MARK: - 再次提问为啥这里用？ 能不用？ 或者用！ 多次练习包括使用后发现？确实是好用 表示包不确定根据语法 ？
     // 可能是 childerVC.tabBarItem = UITabBarItem(title: <#T##String?#>, image: <#T##UIImage?#>, selectedImage: <#T##UIImage?#>)
     func addChilderVC(_ childerVC: UIViewController, title: String?, nomalImageStr: String?, selectedImageStr: String? ) {
