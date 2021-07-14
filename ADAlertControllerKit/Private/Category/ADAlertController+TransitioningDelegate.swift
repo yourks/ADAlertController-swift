@@ -21,57 +21,22 @@ import UIKit
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleAlert {
-            
-            let transition: ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
-            
-            return transition
-        } else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
-            
-            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
-            
-            return transition
-        } else
-//        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet
-        {
-            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStylePresenting
-            
-            return transition
+        guard let style = self.configuration?.preferredStyle else { return nil }
+        switch style {
+        case .alert:
+            return AlertViewStyleTransition(.presenting)
+        case .actionSheet, .sheet:
+            return ActionSheetStyleTransition(.presenting)
         }
-        
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleAlert {
-            
-            let transition: ADAlertViewAlertStyleTransition = ADAlertViewAlertStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
-            
-            return transition
-        } else if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet {
-            
-            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
-            
-            return transition
-        } else
-//        if self.configuration!.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleSheet
-        {
-            let transition: ADAlertViewSheetStyleTransition = ADAlertViewSheetStyleTransition()
-            
-            transition.transitionStyle = ADAlertTransitionStyle.ADAlertTransitionStyleDismissing
-            
-            return transition
+        guard let style = self.configuration?.preferredStyle else { return nil }
+        switch style {
+        case .alert:
+            return AlertViewStyleTransition(.dismissing)
+        case .actionSheet, .sheet:
+            return ActionSheetStyleTransition(.dismissing)
         }
     }
 }

@@ -22,15 +22,11 @@ class ADAlertControllerPresentationController: UIPresentationController {
 
     // MARK: - propert/override
     override var shouldPresentInFullscreen: Bool {
-        get {
-            return false
-        }
+        return false
     }
     
     override var shouldRemovePresentersView: Bool {
-        get {
-            return false
-        }
+        return false
     }
 
     // MARK: - func/override

@@ -7,11 +7,22 @@
 
 import UIKit
 
-typealias ADAlertDidDismissBlock = (_ alertController: ADAlertController) -> Void
+typealias AlertControllerDidDismissAction = (_ alertController: ADAlertController) -> Void
 
-typealias ADConfigurationHandlerBlock = (_ textField: UITextField) -> Void
+typealias ConfigurationTextFieldHandlerBlock = (_ textField: UITextField) -> Void
 
-class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtocol {
+fileprivate extension ADAlertControllerConfiguration {
+    var mainView: ADAlertControllerViewProtocol {
+        switch self.preferredStyle {
+        case .alert:
+            return ADAlertView(configuration: self)
+        case .actionSheet, .sheet:
+            return ADActionSheetView(configuration: self)
+        }
+    }
+}
+
+class ADAlertController: UIViewController, AlertStyleTransitionBehaviorProtocol {
 
     // MARK: - propert/public
     
@@ -40,7 +51,7 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
      通过addTextFieldWithConfigurationHandler添加的 textfield 数组,
      @see addTextFieldWithConfigurationHandler:
      */
-    public var textFields: [UITextField] = Array()
+    public var textFields: [UITextField] = []
 
     /**
      自定义内容视图,默认是nil,在 alert 类型时,是显示在 titlelab 上面,actionsheet 类型时,显示在 message 下面,外部需指定高度约束,
@@ -66,14 +77,14 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
     public var configuration: ADAlertControllerConfiguration?
 
     // ADAlertAction 按钮
-    private var buttons: [UIView] = Array()
+    private var buttons: [UIView] = []
 
     // actionSheetCancelAction  Sheet下取消按钮
     private var actionSheetCancelAction: ADAlertAction?
 
     // MARK: - propert/privateShow
     // 在 alertController执行完 dismiss 之后调用的 block,用于通知优先级队列准备去显示下一个队列中的内容
-    var didDismissBlock: ADAlertDidDismissBlock?
+    var didDismissBlock: AlertControllerDidDismissAction?
 
     // 当 alertController 隐藏时是否从优先级队列中移除,默认 YES,仅在显示时被其他高优先级覆盖时才置为 NO
     private var deleteWhenHiden: Bool = true
@@ -91,7 +102,7 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
 
 
     // MARK: - propert/ADAlertViewAlertStyleTransitionProtocol
-    var moveoutScreen: Bool?
+    var moveoutScreen: Bool = false
 
     // MARK: - init
     private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -103,9 +114,9 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
         super.init(coder: coder)
     }
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//    }
 
     // 自定义
     convenience init(configuration: ADAlertControllerConfiguration?, title: String, message: String?, actions: [ADAlertAction]?) {
@@ -113,20 +124,20 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
         self.init(nibName: nil, bundle: nil)
         
         // 配置
-        self.configuration = configuration ?? ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        self.configuration = configuration ?? ADAlertControllerConfiguration(preferredStyle: .alert)
                 
         // action
         self.actions = actions
         
         // tf
-        self.textFields = Array()
+//        self.textFields = Array()
         
         // present model
         self.modalPresentationStyle = UIModalPresentationStyle.custom
         self.transitioningDelegate = self
         
         // 删除后隐藏
-        self.deleteWhenHiden = true
+//        self.deleteWhenHiden = true
         
         // 当targetViewController有值,且 alertController已经显示了,若targetViewController即将消失了,当前 alertController 是否要自动隐藏,默认 YES
         self.hidenWhenTargetViewControllerDisappear = true
@@ -141,21 +152,9 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 选取样式
-        switch self.configuration!.preferredStyle {
-        
-        case ADAlertControllerStyle.ADAlertControllerStyleAlert:
-            self.mainView = ADAlertView(configuration: configuration!)
+         
+        self.mainView = configuration?.mainView
             
-        case ADAlertControllerStyle.ADAlertControllerStyleSheet:
-            self.mainView = ADActionSheetView(configuration: configuration!)
-            
-        case ADAlertControllerStyle.ADAlertControllerStyleActionSheet:
-            self.mainView = ADActionSheetView(configuration: configuration!)
-            
-        }
-        
         // addSubview
         view.addSubview(mainView!)
         // layoutView
@@ -183,7 +182,7 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
         self.mainView?.textFields = self.textFields
                 
         // alert 点击事件
-        if self.configuration?.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleAlert {
+        if self.configuration?.preferredStyle == .alert {
             self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognized(gestureRecognizer:)))
             
             self.panGestureRecognizer?.delegate = self 
@@ -207,7 +206,7 @@ class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtoc
      ⚠️目前暂未适配键盘遮挡问题!!!
      @param configurationHandler 用于配置textfield的block。该block将textfield对象作为参数，并且可以在显示之前修改textfield的属性。
      */
-    func addTextFieldWithConfigurationHandler(alertActionHandler: ADConfigurationHandlerBlock) {
+    func addTextFieldWithConfigurationHandler(alertActionHandler: ConfigurationTextFieldHandlerBlock) {
         let textField: UITextField = UITextField(frame: CGRect.zero)
         textField.borderStyle = UITextField.BorderStyle.roundedRect
            
@@ -237,16 +236,14 @@ extension ADAlertController: UIGestureRecognizerDelegate {
     
     @objc func panGestureRecognized(gestureRecognizer: UIPanGestureRecognizer) {
 
-        if self.mainView!.isKind(of: ADAlertView.classForCoder()) {
-
-            let view: ADAlertView = self.mainView! as! ADAlertView
+        if let view = self.mainView as? ADAlertView,
+           let presnetVC = self.presentationController as? ADAlertControllerPresentationController {
 
             let offest: CGFloat = gestureRecognizer.translation(in: self.mainView).y//
 
             view.snp.updateConstraints { (constraintMaker) in
                 constraintMaker.centerY.equalToSuperview().offset(offest)
             }
-            let presnetVC: ADAlertControllerPresentationController = self.presentationController as! ADAlertControllerPresentationController
 
             let windowHeight: CGFloat = ADAlertWindow.window().bounds.size.height
             presnetVC.backgroundView?.alpha = 1 - (abs(gestureRecognizer.translation(in: self.mainView).y) / windowHeight)
@@ -316,10 +313,11 @@ extension ADAlertController: ADAlertControllerPriorityQueueProtocol {
         
     var alertPriority: ADAlertPriority {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.alertPriority) as! ADAlertPriority
+            let rawValue = objc_getAssociatedObject(self, &AssociatedKeys.alertPriority) as? Int
+            return ADAlertPriority(rawValue: rawValue ?? 0) ?? .ADAlertPriorityDefault
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.alertPriority, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.alertPriority, newValue.rawValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -332,9 +330,9 @@ extension ADAlertController: ADAlertControllerPriorityQueueProtocol {
         }
     }
     
-    var targetViewController: UIViewController {
+    var targetViewController: UIViewController? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.targetViewController) as! UIViewController
+            return objc_getAssociatedObject(self, &AssociatedKeys.targetViewController) as? UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.targetViewController, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

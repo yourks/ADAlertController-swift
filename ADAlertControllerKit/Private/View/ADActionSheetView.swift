@@ -197,7 +197,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     
         var maxWidth: CGFloat = UIScreen.main.bounds.size.width
         
-        if configuration.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleActionSheet {
+        if configuration.preferredStyle == ADAlertControllerStyle.actionSheet {
             maxWidth -= (ADActionSheetStyleLeadingTrailingPad * 2)
         }
         self.maximumWidth = maxWidth

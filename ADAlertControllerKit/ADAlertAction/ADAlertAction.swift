@@ -57,14 +57,14 @@ class ADAlertAction: NSObject {
     // MARK: - init static 类方法
     static func actionWithTitle(_ title: String, _ actionStyle: ADActionStyle, complete alertActionHandler: @escaping ADAlertActionHandler ) -> ADAlertAction {
         
-        let action: ADAlertAction = ADAlertAction.actionWithTitleFull(title, nil, ADActionStyle.ADActionStyleDefault, complete: alertActionHandler, configuration: ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: actionStyle))
+        let action: ADAlertAction = ADAlertAction.actionWithTitleFull(title, nil, ADActionStyle.default, complete: alertActionHandler, configuration: ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: actionStyle))
 
         return action
     }
     
     static func actionWithTitle(_ image: UIImage, _ actionStyle: ADActionStyle, complete alertActionHandler: @escaping ADAlertActionHandler ) -> ADAlertAction {
         
-        let action: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, image, ADActionStyle.ADActionStyleDefault, complete: alertActionHandler, configuration: ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: actionStyle))
+        let action: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, image, ADActionStyle.default, complete: alertActionHandler, configuration: ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: actionStyle))
 
         return action
     }

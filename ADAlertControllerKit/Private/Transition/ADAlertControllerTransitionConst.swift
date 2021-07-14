@@ -9,4 +9,4 @@ import UIKit
 import Foundation
 
 // 转场动画默认时长
-public let kADAlertControllerTransitionDuration: TimeInterval = 0.35
+public let viewControllerTransitionDuration: TimeInterval = 0.35
