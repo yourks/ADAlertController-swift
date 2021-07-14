@@ -75,7 +75,7 @@ protocol ADAlertControllerPriorityQueueProtocol: ADAlertControllerBaseProtocol {
     // 当前alertController是否仅在targetViewController为最顶部的控制器时才显示,
     // 若有值,则仅当 targetViewController 为最顶层控制器,且当前 alertController 是队列中的最高优先级时才会显示,
     // 默认nil,表示在任意页面都可显示
-    var targetViewController: UIViewController {get set}
+    var targetViewController: UIViewController? {get set}
 
     //  当targetViewController有值,且 alertController已经显示了,若targetViewController即将消失了,当前 alertController 是否要自动隐藏,默认 YES
     var hidenWhenTargetViewControllerDisappear: Bool {get set}

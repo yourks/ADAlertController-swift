@@ -1,5 +1,5 @@
 //
-//  ADAlertViewSheetStyleTransition.swift
+//  ActionSheetStyleTransition.swift
 //  ADAlertController-swift
 //
 //  Created by apple on 2021/7/2.
@@ -7,19 +7,23 @@
 
 import UIKit
 
-class ADAlertViewSheetStyleTransition: NSObject, UIViewControllerAnimatedTransitioning {
+class ActionSheetStyleTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: - propert/public
-    public var transitionStyle: ADAlertTransitionStyle?
+    let transitionStyle: ADAlertTransitionStyle
 
-    // MARK: - func/internal
-    internal func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return kADAlertControllerTransitionDuration
+    init(_ transitionStyle: ADAlertTransitionStyle) {
+        self.transitionStyle = transitionStyle
     }
     
-    internal func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    // MARK: - func/internal
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return viewControllerTransitionDuration
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 
-        if transitionStyle == ADAlertTransitionStyle.ADAlertTransitionStylePresenting {
+        if transitionStyle == .presenting {
             
             let toViewController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
             

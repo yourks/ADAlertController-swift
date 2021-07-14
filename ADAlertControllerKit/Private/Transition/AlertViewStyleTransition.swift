@@ -1,37 +1,49 @@
 //
-//  ADAlertViewAlertStyleTransition.swift
+//  AlertViewStyleTransition.swift
 //  ADAlertController-swift
 //
 //  Created by apple on 2021/7/2.
 //
 
 import UIKit
+/**
+ 1.并不是所有类,都需要继承自NSObject,只有需要跟objc交互时,或者用到objc的相关方法,
+ 比如这里UIViewControllerAnimatedTransitioning协议就要求是NSObject的子类才能遵循
+ 2.对于不变的变量,可以考虑用let,并增加初始化方法
+ 3.模块可不用添加前缀,swift里有命名空间,加入两个模块都命名了相同的名字,用模块名加前缀即可解决冲突
+ 4.访问权限默认是internal,可以不写
+ 
+ */
 
-class ADAlertViewAlertStyleTransition: NSObject, UIViewControllerAnimatedTransitioning {
+
+class AlertViewStyleTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
     // MARK: - propert/public
-    public var transitionStyle: ADAlertTransitionStyle?
+    let transitionStyle: ADAlertTransitionStyle // ⚠️:如果该类并不打算暴露,这里的属性用public也没意义,外部一样访问不了
 
-    
-    // MARK: - func/internal
-    internal func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return kADAlertControllerTransitionDuration
+    init(_ transitionStyle: ADAlertTransitionStyle) {
+        self.transitionStyle = transitionStyle
     }
     
-    internal func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    // MARK: - func/internal
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return viewControllerTransitionDuration
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        if transitionStyle == ADAlertTransitionStyle.ADAlertTransitionStylePresenting {
+        if transitionStyle == .presenting {
             
-            self.ADAlertTransitionStylePresentingAnimation(using: transitionContext)
+            self.doPresentingAnimation(using: transitionContext)
                 
         } else {
             
-            self.ADAlertTransitionStyleDismissingAnimation(using: transitionContext)
+            self.doDismissingAnimation(using: transitionContext)
             
         }
     }
     
-    internal func ADAlertTransitionStylePresentingAnimation(using transitionContext: UIViewControllerContextTransitioning) {
+    private func doPresentingAnimation(using transitionContext: UIViewControllerContextTransitioning) {
         let toViewController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         
         toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
@@ -71,12 +83,12 @@ class ADAlertViewAlertStyleTransition: NSObject, UIViewControllerAnimatedTransit
         }
     }
 
-    internal func ADAlertTransitionStyleDismissingAnimation(using transitionContext: UIViewControllerContextTransitioning) {
+    private func doDismissingAnimation(using transitionContext: UIViewControllerContextTransitioning) {
                 
         let fromViewController: UIViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
 
-        if let fromVC = fromViewController as? ADAlertViewAlertStyleTransitionProtocol {
-            if fromVC.moveoutScreen == true {
+        if let fromVC = fromViewController as? AlertStyleTransitionBehaviorProtocol {
+            if fromVC.moveoutScreen {
                 fromViewController.view.removeFromSuperview()
                 transitionContext.completeTransition(true)
                 return

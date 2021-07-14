@@ -77,18 +77,6 @@ class ADFunctionTableVC: ADBaseVC, UITextFieldDelegate {
             constraintMaker.bottom.equalToSuperview().offset(0)
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - UITableViewDelegate UITableViewDataSource
@@ -120,15 +108,15 @@ extension ADFunctionTableVC: UITableViewDelegate, UITableViewDataSource {
 extension ADFunctionTableVC {
     @objc func alertStyleTitleOnly() {
         
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert), title: "这里是标题", message: "", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "这里是标题", message: "", actions: [cancelAction, sureAction])
 
         alertView.show()
         
@@ -136,15 +124,15 @@ extension ADFunctionTableVC {
     
     @objc func alertStyleMessageOnly() {
         
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert), title: "", message: "这里是内容", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "", message: "这里是内容", actions: [cancelAction, sureAction])
 
         alertView.show()
         
@@ -152,15 +140,15 @@ extension ADFunctionTableVC {
 
     @objc func alertStyleTitleAndMessage() {
         
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
-        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert), title: "这里是标题", message: "这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: ADAlertControllerConfiguration.defaultConfigurationWithPreferredStyle(preferredStyle: ADAlertControllerStyle.alert), title: "这里是标题", message: "这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容里是内容这里是内容这里是内容", actions: [cancelAction, sureAction])
 
         alertView.show()
         
@@ -168,38 +156,38 @@ extension ADFunctionTableVC {
     
     @objc func alertStylePanEnable() {
         
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         config.titleTextColor = UIColor.black
         config.messageTextColor = UIColor.gray
         config.swipeDismissalGestureEnabled = true
         
-        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: "这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容", actions: [cancelAction, sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: "这里是内容这里是内容这里是内容这这里是内容", actions: [cancelAction, sureAction])
 
         alertView.show()
         
     }
 
     @objc func alertStyleCustomContentView() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         
@@ -215,15 +203,15 @@ extension ADFunctionTableVC {
 
     
     @objc func alertStyleLongMessage() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         config.messageTextColor = UIColor.gray
@@ -241,26 +229,26 @@ extension ADFunctionTableVC {
 
     @objc func alertStyleMultipButton() {
 
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("WiFi 或者 移动网络", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("WiFi 或者 移动网络", nil, ADActionStyle.cancel, complete: { (_) in
             print("选择了WiFi 或者 移动网络")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("移动网络", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("移动网络", nil, ADActionStyle.cancel, complete: { (_) in
             print("选择了移动网络")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("WiFi", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("WiFi", nil, ADActionStyle.cancel, complete: { (_) in
             print("选择了WiFi")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("不允许网络访问", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("不允许网络访问", nil, ADActionStyle.cancel, complete: { (_) in
             print("选择了不允许网络访问")
         }, configuration: actionConfig)
 
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "请选择该 APP 允许访问的网络类型", message: nil, actions: [action1, action2, action3, action4])
@@ -270,30 +258,30 @@ extension ADFunctionTableVC {
 
     @objc func alertStyleImageButton() {
 
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
             print("share_1")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
             print("share_2")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
             print("share_3")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
             print("share_4")
         }, configuration: actionConfig)
 
-        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_5"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_5"), ADActionStyle.cancel, complete: { (_) in
             print("share_5")
         }, configuration: actionConfig)
 
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [action1, action2, action3, action4, action5])
@@ -303,67 +291,65 @@ extension ADFunctionTableVC {
     
     @objc func alertStyleGroupButtons() {
 
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
             print("share_1")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
             print("share_2")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
             print("share_3")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
             print("share_4")
         }, configuration: actionConfig)
 
-        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", nil, ADActionStyle.cancel, complete: { (_) in
             print("短信")
         }, configuration: actionConfig)
 
         let group: ADAlertGroupAction = ADAlertGroupAction.groupActionWithActions(actions: [action1, action2, action3, action4, action5])
-//                ADAlertGroupAction *group = [ADAlertGroupAction groupActionWithActions:@[action1, action2, action3, action4, action5]]
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group, action5, action5])
-//        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group])
 
         alertView.show()
     }
 
     @objc func alertStyleImageAction() {
 
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ", UIImage(named: "share_1"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ", UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
             print("share_1")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ空间", UIImage(named: "share_2"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ空间", UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
             print("share_2")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", UIImage(named: "share_3"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
             print("share_3")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("朋友圈", UIImage(named: "share_4"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("朋友圈", UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
             print("share_4")
         }, configuration: actionConfig)
 
-        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("微信", UIImage(named: "share_5"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("微信", UIImage(named: "share_5"), ADActionStyle.cancel, complete: { (_) in
             print("短信")
         }, configuration: actionConfig)
 
         let group: ADAlertGroupAction = ADAlertGroupAction.groupActionWithActions(actions: [action1, action2, action3, action4, action5])
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
 
 //        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group, action5, action5])
@@ -374,20 +360,19 @@ extension ADFunctionTableVC {
 
     @objc func alertStyleTextField() {
 
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.cancel) { (_) in
             print("点击了取消")
         }
 
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
 
         sureAction.enabled = false
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
 
-//        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group, action5, action5])
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [sureAction, cancelAction])
 
         alertView .addTextFieldWithConfigurationHandler { (textField) in
@@ -418,11 +403,11 @@ extension ADFunctionTableVC {
     }
 
     @objc func alertStyleCustomContentViewOnly() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
         //        [advertView show]
@@ -435,11 +420,11 @@ extension ADFunctionTableVC {
     
     
     @objc func actionSheetStyleTitleOnly() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "标题", message: nil, actions: nil )
@@ -450,11 +435,11 @@ extension ADFunctionTableVC {
     }
     
     @objc func actionSheetStyleTitleAndMessage() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "标题", message: "这里是内容,内容同样可以配置字体和字体颜色,以及长文本", actions: nil )
@@ -465,11 +450,11 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleCustomContentView() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         
@@ -485,21 +470,21 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleMultipButton() {
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
-        let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.ADActionStyleDefault) { (_) in
+        let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.default) { (_) in
             print("点击了取消")
         }
-        let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.ADActionStyleDefault) { (_) in
+        let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.default) { (_) in
             print("点击了取消")
         }
         
-        let cancelAction3: ADAlertAction = ADAlertAction.actionWithTitle("删除", ADActionStyle.ADActionStyleDestructive) { (_) in
+        let cancelAction3: ADAlertAction = ADAlertAction.actionWithTitle("删除", ADActionStyle.destructive) { (_) in
             print("点击了取消")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         
@@ -511,34 +496,34 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleImageButton() {
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ", UIImage(named: "share_1"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ", UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
             print("share_1")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ空间", UIImage(named: "share_2"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull("QQ空间", UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
             print("share_2")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", UIImage(named: "share_3"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
             print("share_3")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("朋友圈", UIImage(named: "share_4"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull("朋友圈", UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
             print("share_4")
         }, configuration: actionConfig)
 
-        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("微信", UIImage(named: "share_5"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("微信", UIImage(named: "share_5"), ADActionStyle.cancel, complete: { (_) in
             print("短信")
         }, configuration: actionConfig)
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [action1, action2, action3, action4, action5])
 
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
         alertView.addActionSheetCancelAction(cancelAction: cancelAction)
@@ -547,38 +532,36 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleGroupButton() {
-        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.ADActionStyleDefault)
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
             print("share_1")
         }, configuration: actionConfig)
         
-        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
             print("share_2")
         }, configuration: actionConfig)
 
-        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
             print("share_3")
         }, configuration: actionConfig)
 
-        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
             print("share_4")
         }, configuration: actionConfig)
 
-        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", nil, ADActionStyle.ADActionStyleCancel, complete: { (_) in
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", nil, ADActionStyle.cancel, complete: { (_) in
             print("短信")
         }, configuration: actionConfig)
 
         let group: ADAlertGroupAction = ADAlertGroupAction.groupActionWithActions(actions: [action1, action2, action3, action4, action5])
-//                ADAlertGroupAction *group = [ADAlertGroupAction groupActionWithActions:@[action1, action2, action3, action4, action5]]
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleActionSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group])
-//        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group])
 
-        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
             print("点击了取消")
         }
         alertView.addActionSheetCancelAction(cancelAction: cancelAction)
@@ -588,11 +571,11 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleScrollableButton() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
         //        [advertView show]
@@ -603,65 +586,16 @@ extension ADFunctionTableVC {
         alertView.show()
     }
 
-
-//    - (void)actionSheetStyleScrollableButton
-//    {
-//        ADAlertImageAction *action1 = [ADAlertImageAction actionWithTitle:@"QQ" image:[UIImage imageNamed:@"share_1"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action2 = [ADAlertImageAction actionWithTitle:@"QQ空间" image:[UIImage imageNamed:@"share_2"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action3 = [ADAlertImageAction actionWithTitle:@"短信" image:[UIImage imageNamed:@"share_3"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action4 = [ADAlertImageAction actionWithTitle:@"朋友圈" image:[UIImage imageNamed:@"share_4"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action5 = [ADAlertImageAction actionWithTitle:@"微信好友" image:[UIImage imageNamed:@"share_5"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action6 = [ADAlertImageAction actionWithTitle:@"微博" image:[UIImage imageNamed:@"share_1"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADAlertImageAction *action7 = [ADAlertImageAction actionWithTitle:@"支付宝" image:[UIImage imageNamed:@"share_2"] style:ADActionStyleDefault handler:^(__kindof ADAlertAction * _Nonnull action) {
-//
-//        }]
-//
-//        ADScrollableGroupAction *group = [ADScrollableGroupAction scrollableGroupActionWithActionWidth:100 actions:@[action1, action2, action3, action4, action5,action6,action7]]
-//
-//        ADAlertControllerConfiguration *config = [ADAlertControllerConfiguration defaultConfigurationWithPreferredStyle:ADAlertControllerStyleActionSheet]
-//        config.showsSeparators = YES
-//        config.messageTextInset = UIEdgeInsetsMake(0, 0, 10, 0)
-//
-//        ADAlertController *alertView = [[ADAlertController alloc] initWithOptions:config title:@"分享" message:@"左右滑动查看更多分享类型" actions:@[group]]
-//
-//        ADAlertAction *cancelAction = [ADAlertAction actionWithTitle:@"取消" style:ADActionStyleCancel handler:^(__kindof ADAlertAction * _Nonnull action) {
-//            NSLog(@"点击了取消")
-//        }]
-//
-//        [alertView addActionSheetCancelAction:cancelAction]
-//
-//        [alertView show]
-//
-//    }
-
     @objc func sheetStyle() {
 
-        let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.ADActionStyleDefault) { (_) in
+        let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.default) { (_) in
             print("点击了取消")
         }
-        let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.ADActionStyleDefault) { (_) in
+        let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.default) { (_) in
             print("点击了取消")
         }
 
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleSheet)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.sheet)
         config.showsSeparators = true
         config.messageTextInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 20, right: 10)
         
@@ -675,14 +609,12 @@ extension ADFunctionTableVC {
     }
 
     @objc func sheetStyleSample() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
-        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
-        //        [advertView show]
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
 
@@ -690,40 +622,12 @@ extension ADFunctionTableVC {
         alertView.show()
     }
     
-//    - (void)sheetStyleSample
-//    {
-//        ADPickerView *pickerView = [ADPickerView pickerViewWithTitle:@"请选择出生年月" datasource:self]
-//        pickerView.firstColSelectRowIndex = self.selectYearIndex
-//        pickerView.secondColSelectRowIndex = self.selectMonthIndex
-//        pickerView.needAutoScrollToPreviouSelectIndex = YES
-//
-//        __weak typeof(self)weakself = self
-//        pickerView.onSureCallback = ^(NSUInteger firstColSelectRowIndex, NSUInteger secondColSelectRowIndex, NSUInteger thirdColSelectRowIndex) {
-//            weakself.selectYearIndex = firstColSelectRowIndex
-//            weakself.selectMonthIndex = secondColSelectRowIndex
-//            NSLog(@"您选择的出生年月是%@ %@",weakself.yearDatasource[firstColSelectRowIndex],weakself.monthDatasource[secondColSelectRowIndex])
-//
-//        }
-//
-//        [pickerView show]
-//
-//    }
     
     @objc func prorityQueueSample() {
         
-        
-//        for (int i = 0 i < 10 i++) {
-//            ADAlertControllerStyle style = i % 2 == 0 ? ADAlertControllerStyleAlert:ADAlertControllerStyleActionSheet
-//            ADAlertPriority alertPrority = [self alertProrityWithIndex:i]
-//
-//            NSString *title = [NSString stringWithFormat:@"当前是第%d个插入的队列的,优先级是%@",i+1,[self alertProrityDescription:alertPrority]]
-//            ADAlertController *alertController = [self alertControllerWithPreferredStyle:style title:title alertPrority:alertPrority]
-//            [alertController enqueue]
-//        }
-
         for index: NSInteger in 0..<10 {
             
-            let style: ADAlertControllerStyle = (index % 2 == 0) ?ADAlertControllerStyle.ADAlertControllerStyleAlert : ADAlertControllerStyle.ADAlertControllerStyleSheet
+            let style: ADAlertControllerStyle = (index % 2 == 0) ?ADAlertControllerStyle.alert : ADAlertControllerStyle.sheet
             
             var alertPrority: ADAlertPriority = ADAlertPriority.ADAlertPriorityDefault
 
@@ -751,26 +655,27 @@ extension ADFunctionTableVC {
             config.hidenWhenTapBackground = true
             
             switch style {
-            case ADAlertControllerStyle.ADAlertControllerStyleAlert:
-                let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.ADActionStyleDefault) { (_) in
+            case ADAlertControllerStyle.alert:
+                let cancelAction1: ADAlertAction = ADAlertAction.actionWithTitle("添加", ADActionStyle.default) { (_) in
                     print("点击了取消")
                 }
-                let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.ADActionStyleDefault) { (_) in
+                let cancelAction2: ADAlertAction = ADAlertAction.actionWithTitle("编辑", ADActionStyle.default) { (_) in
                     print("点击了取消")
                 }
-                let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+                let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
                 config.showsSeparators = true
                 let alertView: ADAlertController = ADAlertController(configuration: config, title: title, message: nil, actions: [cancelAction1, cancelAction2])
                 alertView.alertPriority = alertPrority
                 alertView.enqueue()
 
-            case ADAlertControllerStyle.ADAlertControllerStyleSheet:
+            case ADAlertControllerStyle.sheet:
+                // swiftlint:disable no_fallthrough_only
                 fallthrough
-                
-            case ADAlertControllerStyle.ADAlertControllerStyleActionSheet:
+                // swiftlint:enable type_body_length
+            case ADAlertControllerStyle.actionSheet:
                 
                 let alertView: ADAlertController = ADAlertController(configuration: config, title: title, message: nil, actions: nil)
-                let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.ADActionStyleSheetCancel) { (_) in
+                let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
                     print("点击了取消")
                 }
                 alertView.addActionSheetCancelAction(cancelAction: cancelAction)
@@ -778,86 +683,28 @@ extension ADFunctionTableVC {
             }
         }
         
-//        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
-//            print("点击了确定")
-//        }
-//
-//        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
-//        config.showsSeparators = true
-//        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
-//        //        [advertView show]
-//
-//        let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
-
-
-        
-        
-//        alertView.show()
     }
 
-//    - (void)prorityQueueSample
-//    {
-//        for (int i = 0 i < 10 i++) {
-//            ADAlertControllerStyle style = i % 2 == 0 ? ADAlertControllerStyleAlert:ADAlertControllerStyleActionSheet
-//            ADAlertPriority alertPrority = [self alertProrityWithIndex:i]
-//
-//            NSString *title = [NSString stringWithFormat:@"当前是第%d个插入的队列的,优先级是%@",i+1,[self alertProrityDescription:alertPrority]]
-//            ADAlertController *alertController = [self alertControllerWithPreferredStyle:style title:title alertPrority:alertPrority]
-//            [alertController enqueue]
-//        }
-//
-//    }
     
     @objc func targetViewControllerSample() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
-        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
-        //        [advertView show]
 
         let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
 
         alertView.show()
     }
-
-//    - (void)targetViewControllerSample
-//    {
-//        //添加五个控制器进入队列中,其中第三个的优先级最高,默认应该是优先显示第三个,但是第三个的 alertController 有设置targetViewController,若是此时 push 到一个新页面了,那么会自动隐藏,并显示下一个队列中的低优先级的警告框
-//        for (int i = 0 i < 5 i++) {
-//            ADAlertControllerStyle style = ADAlertControllerStyleAlert
-//            ADAlertPriority alertPrority = ADAlertPriorityDefault
-//            UIViewController *targetVC = nil
-//            NSString *title = [NSString stringWithFormat:@"当前是第%d个插入的队列的,优先级是%@",i+1,[self alertProrityDescription:alertPrority]]
-//
-//            if (i == 2) {
-//                alertPrority = ADAlertPriorityRequire
-//                targetVC = self
-//                title = [NSString stringWithFormat:@"当前是第%d个插入的队列的,优先级是%@,并有指定仅显示在当前页",i+1,[self alertProrityDescription:alertPrority]]
-//            }
-//
-//            ADAlertController *alertController = [self alertControllerWithPreferredStyle:style title:title alertPrority:alertPrority]
-//            alertController.targetViewController = targetVC
-//            [alertController enqueue]
-//        }
-//
-//        //3 秒后会进入到一个新的页面
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            UIViewController *vc = [[UIViewController alloc] init]
-//            vc.title = @"新的页面"
-//            vc.view.backgroundColor = [UIColor redColor]
-//            [self.navigationController pushViewController:vc animated:YES]
-//        })
-//    }
 
     @objc func listSample() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.ADActionStyleDefault) { (_) in
+        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
             print("点击了确定")
         }
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.ADAlertControllerStyleAlert)
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
         config.showsSeparators = true
         //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
         //        [advertView show]
@@ -866,25 +713,4 @@ extension ADFunctionTableVC {
 
         alertView.show()
     }
-
-//    - (void)blackListSample
-//    {
-//
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"这里是一个警告框" message:@"我们在 2 秒后创建一个ADAlertController" preferredStyle:UIAlertControllerStyleAlert]
-//        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//        }]
-//        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//           }]
-//        [alertController addAction:cancel]
-//        [alertController addAction:sure]
-//        [self presentViewController:alertController animated:YES completion:nil]
-//
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//             ADAlertController *alertController = [self alertControllerWithPreferredStyle:ADAlertControllerStyleAlert title:@"这里是标题" alertPrority:ADAlertPriorityRequire]
-//            [alertController enqueue]
-//        })
-//
-//    }
 }

@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     
     // MARK: - proprety/private
@@ -54,12 +52,11 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     var message: String? {
         willSet {
             if newValue?.count ?? 0 == 0 {
-                messageTextView!.snp.remakeConstraints { (constraintMaker) in
-                    constraintMaker.left.equalToSuperview().offset(15)
-                    constraintMaker.right.equalToSuperview().offset(-15)
-                    constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(0)
-                    constraintMaker.height.greaterThanOrEqualTo(0)
+                messageTextView?.snp.updateConstraints { (constraintMaker) in
+                    constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(0.1)
+                    constraintMaker.height.greaterThanOrEqualTo(0.1)
                 }
+                messageTextView?.layoutIfNeeded()
             }
         }
         didSet {
@@ -88,10 +85,10 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             contentViewContainerView?.snp.updateConstraints { (constraintMaker) in
                 constraintMaker.height.greaterThanOrEqualTo(contentViewHeight!)
             }
+            
             contentView?.snp.makeConstraints({ (constraintMaker) in
                 constraintMaker.edges.equalToSuperview()
             })
-
 
             contentViewContainerView?.layoutIfNeeded()
             contentView?.layoutIfNeeded()
@@ -106,12 +103,9 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             }
 
             if actionButtons?.count == 0 {
-                separatorView?.isHidden = true
                 return
             }
-            
-            separatorView?.isHidden = false
-            
+                        
             for index: Int in 0..<actionButtons!.count {
                 if configuration?.alertActionsViewBtnBackgroundColors.count ?? 0 > index {
                     actionButtons?[index].backgroundColor = configuration?.alertActionsViewBtnBackgroundColors[index]
@@ -119,20 +113,17 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
                     actionButtons?[index].backgroundColor = UIColor.white
                 }
 
-                var actionButtonContainerViewHeight: CGFloat = 40.0
-                    actionButtonContainerViewHeight = 40.0 * CGFloat(actionButtons!.count)
-                    actionButtonStackView?.axis = NSLayoutConstraint.Axis.vertical
-                    actionButtonStackView?.alignment = UIStackView.Alignment.fill
-                    actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
-                
-                actionButtonContainerView?.snp.remakeConstraints { (constraintMaker) in
-                    constraintMaker.left.equalToSuperview()
-                    constraintMaker.right.equalToSuperview()
-                    constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(15)
+                let actionButtonContainerViewHeight: CGFloat = 40.0 * CGFloat(actionButtons!.count)
+                actionButtonStackView?.axis = NSLayoutConstraint.Axis.vertical
+                actionButtonStackView?.alignment = UIStackView.Alignment.fill
+                actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
+
+                actionButtonContainerView?.snp.updateConstraints { (constraintMaker) in
                     constraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
-                    constraintMaker.bottom.equalToSuperview()
                 }
                 
+                actionButtonContainerView?.layoutIfNeeded()
+
                 actionButtons?[index].setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
                 actionButtonStackView!.addArrangedSubview(actionButtons![index])
             }
@@ -146,6 +137,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     }
     // textFields
     var textFields: [UITextField]?
+    
     // 取消按钮
     var actionSheetCancelAction: ADAlertAction? {
         didSet {
@@ -167,14 +159,14 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             bottomactionButtonStackView?.alignment = UIStackView.Alignment.fill
             bottomactionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
 
-            bottomView?.snp.remakeConstraints { (constraintMaker) in
-                constraintMaker.left.equalToSuperview().offset(0)
-                constraintMaker.right.equalToSuperview().offset(0)
+            bottomView?.snp.updateConstraints { (constraintMaker) in
                 constraintMaker.top.equalTo(topView!.snp_bottom).offset(5)
                 constraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
                 constraintMaker.bottom.equalToSuperview().offset(-15)
             }
             
+            bottomView?.layoutIfNeeded()
+
             actionSheetCancelAction?.button?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
             bottomactionButtonStackView!.addArrangedSubview(actionSheetCancelAction!.button!)
         }
@@ -197,7 +189,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     
         var maxWidth: CGFloat = UIScreen.main.bounds.size.width
         
-        if configuration.preferredStyle == ADAlertControllerStyle.ADAlertControllerStyleActionSheet {
+        if configuration.preferredStyle == ADAlertControllerStyle.actionSheet {
             maxWidth -= (ADActionSheetStyleLeadingTrailingPad * 2)
         }
         self.maximumWidth = maxWidth
@@ -218,6 +210,8 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         topView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(topView!)
 
+        self.setupTopView(configuration: configuration)
+
         // 底部容器视图
         bottomView = UIView(frame: CGRect.zero)
         bottomView?.clipsToBounds = true
@@ -226,14 +220,19 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         bottomView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(bottomView!)
 
+        self.setupTopView(configuration: configuration)
+        
+        self.setupBottomView(configuration: configuration)
+
+    }
+    
+    internal func setupTopView(configuration: ADAlertControllerConfiguration) {
+
         // title
         titleLabel = ADAlertTitleLabel(frame: CGRect.zero)
-        //        _titleLabel.textInset = UIEdgeInsetsMake(20, 0, 10, 0)
         titleLabel?.contentCompressionResistancePriority(for: NSLayoutConstraint.Axis.vertical)
         titleLabel?.numberOfLines = 2
-        if configuration.titleFont != nil {
-            titleLabel?.font = configuration.titleFont
-        }
+        if configuration.titleFont != nil { titleLabel?.font = configuration.titleFont }
         titleLabel?.textAlignment = NSTextAlignment.center
         titleLabel?.textColor = configuration.titleTextColor
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
@@ -246,9 +245,7 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         messageTextView?.backgroundColor = UIColor.clear
         messageTextView?.isEditable = false
         messageTextView?.isSelectable = false
-        if configuration.messageFont != nil {
-            messageTextView?.font = configuration.messageFont
-        }
+        if configuration.messageFont != nil { messageTextView?.font = configuration.messageFont }
         messageTextView?.font = UIFont.systemFont(ofSize: 15)
         messageTextView?.textContainer.lineFragmentPadding = 0.0
         messageTextView?.textContainerInset = UIEdgeInsets.zero
@@ -263,6 +260,11 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         contentViewContainerView?.translatesAutoresizingMaskIntoConstraints = false
         topView?.addSubview(contentViewContainerView!)
 
+        self.setupTopBtnView(configuration: configuration)
+    }
+    
+    internal func setupTopBtnView(configuration: ADAlertControllerConfiguration) {
+
         // actionButtonContainerView
         actionButtonContainerView = UIView(frame: CGRect.zero)
         actionButtonContainerView? .setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
@@ -275,12 +277,6 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
         actionButtonStackView?.spacing = 0.0
         actionButtonContainerView?.addSubview(actionButtonStackView!)
 
-        // bottomactionButtonStackView
-        bottomactionButtonStackView = UIStackView()
-        bottomactionButtonStackView?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
-        bottomactionButtonStackView?.spacing = 0.0
-        bottomView?.addSubview(bottomactionButtonStackView!)
-
         // 显示分割线
         if configuration.showsSeparators == true {
             actionButtonStackView?.spacing = 0.5
@@ -290,26 +286,19 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             separatorView?.translatesAutoresizingMaskIntoConstraints = false
             actionButtonContainerView?.addSubview(separatorView!)
         }
+    }
     
+    internal func setupBottomView(configuration: ADAlertControllerConfiguration) {
+
+        // bottomactionButtonStackView
+        bottomactionButtonStackView = UIStackView()
+        bottomactionButtonStackView?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
+        bottomactionButtonStackView?.spacing = 0.0
+        bottomView?.addSubview(bottomactionButtonStackView!)
     }
 
-    
     // MARK: - layoutView
     func layoutView() {
-//        self.backgroundColor = UIColor.yellow
-//        backgroundContainerView?.backgroundColor = UIColor.red
-//        topView?.backgroundColor = UIColor.white
-//        bottomView?.backgroundColor = UIColor.green
-//       bottomactionButtonContainerView?.backgroundColor = UIColor.orange
-//        bottomactionButtonStackView?.backgroundColor = UIColor.black
-//
-//                titleLabel?.backgroundColor = UIColor.gray
-//                messageTextView?.backgroundColor = UIColor.yellow
-//                contentViewContainerView?.backgroundColor = UIColor.purple
-//                actionButtonContainerView?.backgroundColor = UIColor.red
-//                actionButtonContainerView?.backgroundColor = UIColor.green
-//        actionButtonStackView?.backgroundColor = UIColor.green
-//        separatorView?.backgroundColor = UIColor.gray
         
         // 添加约束
         self.snp.makeConstraints { (constraintMaker) in
@@ -332,7 +321,25 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.top.equalToSuperview().offset(0)
             constraintMaker.height.greaterThanOrEqualTo(15+20+15)
         }
+        
+        bottomView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.left.equalToSuperview().offset(0)
+            constraintMaker.right.equalToSuperview().offset(0)
+            constraintMaker.top.equalTo(topView!.snp_bottom).offset(0)
+            constraintMaker.height.greaterThanOrEqualTo(0)
+            constraintMaker.bottom.equalToSuperview()
+        }
 
+        self.layoutTopView()
+        
+        self.layoutBottomView()
+
+        messageTextView?.layoutIfNeeded()
+        backgroundContainerView?.layoutIfNeeded()
+        self.layoutIfNeeded()
+    }
+    
+    internal func layoutTopView() {
         titleLabel?.snp.makeConstraints { (constraintMaker) in
             constraintMaker.left.equalToSuperview().offset(15)
             constraintMaker.right.equalToSuperview().offset(-15)
@@ -353,7 +360,9 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.top.equalTo(messageTextView!.snp_bottom).offset(0)
             constraintMaker.height.greaterThanOrEqualTo(0)
         }
-        
+    }
+    
+    internal func layoutTopBtnView() {
         actionButtonContainerView?.snp.makeConstraints { (constraintMaker) in
             constraintMaker.left.equalToSuperview()
             constraintMaker.right.equalToSuperview()
@@ -369,21 +378,6 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.bottom.equalToSuperview()
         }
         
-        bottomView?.snp.makeConstraints { (constraintMaker) in
-            constraintMaker.left.equalToSuperview().offset(0)
-            constraintMaker.right.equalToSuperview().offset(0)
-            constraintMaker.top.equalTo(topView!.snp_bottom).offset(0)
-            constraintMaker.height.greaterThanOrEqualTo(0)
-            constraintMaker.bottom.equalToSuperview()
-        }
-
-        bottomactionButtonStackView?.snp.makeConstraints { (constraintMaker) in
-            constraintMaker.top.equalToSuperview().offset(0.5)
-            constraintMaker.left.equalToSuperview()
-            constraintMaker.right.equalToSuperview()
-            constraintMaker.bottom.equalToSuperview()
-        }
-
         if (self.configuration?.showsSeparators) != nil {
             separatorView?.snp.makeConstraints { (constraintMaker) in
                 constraintMaker.left.equalToSuperview()
@@ -392,9 +386,15 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
                 constraintMaker.height.equalTo(0.5)
             }
         }
-        
-        messageTextView?.layoutIfNeeded()
-        backgroundContainerView?.layoutIfNeeded()
-        self.layoutIfNeeded()
+
+    }
+    
+    internal func layoutBottomView() {
+        bottomactionButtonStackView?.snp.makeConstraints { (constraintMaker) in
+            constraintMaker.top.equalToSuperview().offset(0.5)
+            constraintMaker.left.equalToSuperview()
+            constraintMaker.right.equalToSuperview()
+            constraintMaker.bottom.equalToSuperview()
+        }
     }
 }

@@ -33,7 +33,7 @@ class ADAlertActionConfiguration: NSObject {
     public static func defaultConfigurationWithActionStyle(style: ADActionStyle) -> ADAlertActionConfiguration {
         let config: ADAlertActionConfiguration = ADAlertActionConfiguration()
         switch style {
-        case .ADActionStyleDestructive:
+        case .destructive:
             config.titleColor = UIColor.red
             config.disabledTitleColor = UIColor.red
         default:

@@ -11,7 +11,7 @@ class ADAlertControllerConfiguration: NSObject {
     /**
      alertController 类型,默认 alert类型
      */
-    var preferredStyle: ADAlertControllerStyle = ADAlertControllerStyle.ADAlertControllerStyleAlert
+    var preferredStyle: ADAlertControllerStyle = ADAlertControllerStyle.alert
     // ADAlertControllerStyle.Alert
     /**
      点击背景是否关闭警告框视图,默认 NO
@@ -119,7 +119,7 @@ class ADAlertControllerConfiguration: NSObject {
         config.alertContainerViewBackgroundColor = UIColor.white
         config.alertMaskViewBackgroundColor = UIColor.black.withAlphaComponent(0.5)
         
-        if preferredStyle != ADAlertControllerStyle.ADAlertControllerStyleSheet {
+        if preferredStyle != ADAlertControllerStyle.sheet {
             config.alertViewCornerRadius = 4
         }
         

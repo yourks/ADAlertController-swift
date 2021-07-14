@@ -49,12 +49,12 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
     var message: String? {
         willSet {
             if newValue?.count ?? 0 == 0 {
-                messageTextView!.snp.remakeConstraints { (constraintMaker) in
-                    constraintMaker.left.equalToSuperview().offset(15)
-                    constraintMaker.right.equalToSuperview().offset(-15)
+                messageTextView!.snp.updateConstraints { (constraintMaker) in
                     constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(0)
                     constraintMaker.height.greaterThanOrEqualTo(0)
                 }
+                
+                messageTextView?.layoutIfNeeded()
             }
         }
         didSet {
@@ -87,8 +87,8 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
                 constraintMaker.edges.equalToSuperview()
             })
 
-
             contentViewContainerView?.layoutIfNeeded()
+
             contentView?.layoutIfNeeded()
         }
     }
@@ -101,12 +101,9 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
             }
 
             if actionButtons?.count == 0 {
-                separatorView?.isHidden = true
                 return
             }
-            
-            separatorView?.isHidden = false
-            
+                        
             for index: Int in 0..<actionButtons!.count {
                 if configuration?.alertActionsViewBtnBackgroundColors.count ?? 0 > index {
                     actionButtons?[index].backgroundColor = configuration?.alertActionsViewBtnBackgroundColors[index]
@@ -127,13 +124,11 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
                     actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
                 }
                 
-                actionButtonContainerView?.snp.remakeConstraints { (constraintMaker) in
-                    constraintMaker.left.equalToSuperview()
-                    constraintMaker.right.equalToSuperview()
-                    constraintMaker.top.equalTo(textFieldContainerView!.snp_bottom).offset(15)
+                actionButtonContainerView?.snp.updateConstraints { (constraintMaker) in
                     constraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
-                    constraintMaker.bottom.equalToSuperview()
                 }
+                
+                actionButtonContainerView?.layoutIfNeeded()
                 
                 actionButtons?[index].setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
                 actionButtonStackView!.addArrangedSubview(actionButtons![index])
@@ -163,12 +158,14 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
                 }
             }
 
-            self.textFieldContainerView?.snp.remakeConstraints({ (constraintMaker) in
+            textFieldContainerView?.snp.remakeConstraints({ (constraintMaker) in
                 constraintMaker.left.equalToSuperview().offset(15)
                 constraintMaker.right.equalToSuperview().offset(-15)
                 constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
                 constraintMaker.height.greaterThanOrEqualTo(10+40+(40+5)*(textFields!.count-1)+10)
             })
+            
+            textFieldContainerView?.layoutIfNeeded()
         }
     }
     
@@ -181,6 +178,14 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
     var actionSheetCancelAction: ADAlertAction?
     
     // MARK: - init
+    private init() {
+        super.init(frame: CGRect.zero)
+    }
+
+    internal required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     required convenience init(configuration: ADAlertControllerConfiguration) {
         
         self.init()
@@ -196,7 +201,12 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
         backgroundContainerView?.backgroundColor = configuration.alertContainerViewBackgroundColor
         backgroundContainerView?.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundContainerView!)
+
+        self.setupContentView(configuration: configuration)
         
+    }
+        
+    internal func setupContentView(configuration: ADAlertControllerConfiguration) {
         // titleLabel
         titleLabel = ADAlertTitleLabel(frame: CGRect.zero)
         //        _titleLabel.textInset = UIEdgeInsetsMake(20, 0, 10, 0)
@@ -239,7 +249,11 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
         textFieldContainerView? .setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
         textFieldContainerView?.translatesAutoresizingMaskIntoConstraints = false
         backgroundContainerView?.addSubview(textFieldContainerView!)
-
+        
+        self.setupContentBtnView(configuration: configuration)
+    }
+    
+    internal func setupContentBtnView(configuration: ADAlertControllerConfiguration) {
         // actionButtonContainerView
         actionButtonContainerView = UIView(frame: CGRect.zero)
         actionButtonContainerView? .setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)
@@ -262,26 +276,11 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
             actionButtonContainerView?.addSubview(separatorView!)
         }
     }
-    
-    private init() {
-        super.init(frame: CGRect.zero)
-    }
 
-    internal required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
+    // MARK: - layoutView
     func layoutView() {
-//        backgroundContainerView?.backgroundColor = UIColor.white
-//        titleLabel?.backgroundColor = UIColor.gray
-//        messageTextView?.backgroundColor = UIColor.gray
-//        contentViewContainerView?.backgroundColor = UIColor.gray
-//        textFieldContainerView.backgroundColor = UIColor.gray
-//        actionButtonContainerView.backgroundColor = UIColor.gray
-//        actionButtonContainerView.backgroundColor = UIColor.gray
-//        actionButtonStackView.backgroundColor = UIColor.green
-//        separatorView?.backgroundColor = UIColor.gray
-
+        
         // 添加约束
         self.snp.makeConstraints { (constraintMaker) in
             constraintMaker.centerX.equalToSuperview()
@@ -297,6 +296,16 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.height.greaterThanOrEqualTo(15+20+15)
         }
 
+        self.layoutContentView()
+        
+        messageTextView?.layoutIfNeeded()
+        
+        backgroundContainerView?.layoutIfNeeded()
+        
+        self.layoutIfNeeded()
+    }
+    
+    internal func layoutContentView() {
         titleLabel?.snp.makeConstraints { (constraintMaker) in
             constraintMaker.left.equalToSuperview().offset(15)
             constraintMaker.right.equalToSuperview().offset(-15)
@@ -324,7 +333,11 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(0)
             constraintMaker.height.greaterThanOrEqualTo(0)
         }
-
+        
+        self.layoutContentBtnView()
+    }
+    
+    internal func layoutContentBtnView() {
         actionButtonContainerView?.snp.makeConstraints { (constraintMaker) in
             constraintMaker.left.equalToSuperview()
             constraintMaker.right.equalToSuperview()
@@ -348,10 +361,5 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
                 constraintMaker.height.equalTo(0.5)
             }
         }
-        
-        messageTextView?.layoutIfNeeded()
-        backgroundContainerView?.layoutIfNeeded()
-        self.layoutIfNeeded()
     }
-    
 }

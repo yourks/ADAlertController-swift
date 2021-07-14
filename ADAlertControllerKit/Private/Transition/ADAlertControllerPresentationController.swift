@@ -21,20 +21,12 @@ class ADAlertControllerPresentationController: UIPresentationController {
     public var backgroundView: UIView?
 
     // MARK: - propert/override
-    // swiftlint:disable implicit_getter
     override var shouldPresentInFullscreen: Bool {
-        get {
-            return false
-        }
-        // swiftlint:enable implicit_getter
+        return false
     }
     
-    // swiftlint:disable implicit_getter
     override var shouldRemovePresentersView: Bool {
-        get {
-            return false
-        }
-        // swiftlint:enable implicit_getter
+        return false
     }
 
     // MARK: - func/override
