@@ -805,7 +805,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Q2K2E67T5B;
 				INFOPLIST_FILE = "Example/ADAlertController-swift/Main/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -828,7 +828,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Q2K2E67T5B;
 				INFOPLIST_FILE = "Example/ADAlertController-swift/Main/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

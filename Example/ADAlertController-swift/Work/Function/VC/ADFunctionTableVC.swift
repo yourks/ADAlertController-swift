@@ -96,9 +96,10 @@ extension ADFunctionTableVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return functionArr.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // swiftlint:disable force_cast
         let cell: ADFunctionTableCell = tableView.dequeueReusableCell(withIdentifier: "ADFunctionTableCell", for: indexPath) as! ADFunctionTableCell
+        // swiftlint:enable force_cast
         cell.model = functionArr[indexPath.row]
         if indexPath.row % 2 == 0 {
             cell.contentView.backgroundColor = UIColor.red

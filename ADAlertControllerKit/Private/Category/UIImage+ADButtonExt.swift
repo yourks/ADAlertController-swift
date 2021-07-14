@@ -38,7 +38,6 @@ extension UIButton {
     fileprivate typealias ButtonEdgeInsets = (image: UIEdgeInsets, title: UIEdgeInsets, content: UIEdgeInsets)
     
     // MARK: - public func
-
     // 设置UIButton中图片在文字的什么位置
     func setImagePosition(postion: ButtonImagePosition, spacing: CGFloat) {
         

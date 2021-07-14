@@ -14,7 +14,7 @@ typealias ADConfigurationHandlerBlock = (_ textField: UITextField) -> Void
 class ADAlertController: UIViewController, ADAlertViewAlertStyleTransitionProtocol {
 
     // MARK: - propert/public
-    
+        
     /**
      显示在 alertTitle  的详细文本信息
      */
@@ -247,7 +247,9 @@ extension ADAlertController: UIGestureRecognizerDelegate {
                 constraintMaker.centerY.equalToSuperview().offset(offest)
             }
             let presnetVC: ADAlertControllerPresentationController = self.presentationController as! ADAlertControllerPresentationController
-
+            
+            
+            
             let windowHeight: CGFloat = ADAlertWindow.window().bounds.size.height
             presnetVC.backgroundView?.alpha = 1 - (abs(gestureRecognizer.translation(in: self.mainView).y) / windowHeight)
             if gestureRecognizer.state == UIGestureRecognizer.State.ended {
