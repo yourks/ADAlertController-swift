@@ -7,9 +7,19 @@
 
 import UIKit
 
-protocol ADGuidesAlertViewDelegate: class {
-    func advertViewDidSelectItem(view: ADGuidesAlertView, index: Int)
+// 这里声明代理方法不对
+protocol ADGuidesAlertViewDelegate: AnyObject {
+    func advertView(_ view: ADGuidesAlertView, didSelectItemAt index: Int)
 }
+
+/**
+xcode中快速注释的方法:
+ 光标放在要注释的代码上面(类声明,函数,变量等),按
+ Alt + Command + /
+ 或者 Command + ,打开偏好设置,选中 Key Bindings,在filter中输入 Add Documentation,这里显示的就是添加注释的快捷键
+ 
+
+ */
 
 class ADGuidesAlertView: UIView, UIScrollViewDelegate {
 
@@ -17,7 +27,7 @@ class ADGuidesAlertView: UIView, UIScrollViewDelegate {
     /**
      当前页数
      */
-    public var currentPage: Int?
+    public var currentPage: Int? // 类都没有声明为public 这里的属性声明为public有什么意义
 
     /**
      当前列表
@@ -26,7 +36,7 @@ class ADGuidesAlertView: UIView, UIScrollViewDelegate {
     /**
      代理
      */
-    weak open var delegate: ADGuidesAlertViewDelegate?
+    weak var delegate: ADGuidesAlertViewDelegate? // open仅用在可被继承的模块时,是最高权限的访问级别,通常用在类声明中,
 
     /**
      父视图
@@ -218,7 +228,7 @@ class ADGuidesAlertView: UIView, UIScrollViewDelegate {
 
     // MARK: - @objc func
     @objc func actionTapped(tap: UITapGestureRecognizer) {
-        self.delegate?.advertViewDidSelectItem(view: self, index: tap.view?.tag ?? -1)
+        self.delegate?.advertView(self, didSelectItemAt: tap.view?.tag ?? -1)
         alertController?.hiden()
     }
     
