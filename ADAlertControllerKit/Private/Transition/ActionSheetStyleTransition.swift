@@ -16,6 +16,7 @@ class ActionSheetStyleTransition: NSObject, UIViewControllerAnimatedTransitionin
         self.transitionStyle = transitionStyle
     }
     
+    
     // MARK: - func/internal
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return viewControllerTransitionDuration

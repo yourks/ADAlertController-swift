@@ -8,8 +8,7 @@
 import UIKit
 import MapKit
 
-class ADFunctionTableVC: ADBaseVC, UITextFieldDelegate {
-    
+class ADFunctionTableVC: ADBaseVC, UITextFieldDelegate, ADGuidesAlertViewDelegate {
 
     var functionArr: Array = [ADFunctionModel]()
     
@@ -76,6 +75,11 @@ class ADFunctionTableVC: ADBaseVC, UITextFieldDelegate {
             constraintMaker.left.right.top.equalToSuperview()
             constraintMaker.bottom.equalToSuperview().offset(0)
         }
+    }
+    
+    // MARK: - ADGuideAlertControllerDelegate
+    func advertViewDidSelectItem(view: ADGuidesAlertView, index: Int) {
+            
     }
 }
 
@@ -403,19 +407,25 @@ extension ADFunctionTableVC {
     }
 
     @objc func alertStyleCustomContentViewOnly() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
-            print("点击了确定")
-        }
+//        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
+//            print("点击了确定")
+//        }
+//
+//        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
+//        config.showsSeparators = true
+//        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
+//        //        [advertView show]
+//
+//        let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
+//
+//
+//        alertView.show()
+//        actionBtn.setBackgroundImage(UIImage.ad_imageWithTheColor(color: UIColor.white.withAlphaComponent(0)), for: UIControl.State.normal)
+//        actionBtn.setBackgroundImage(UIImage.ad_imageWithTheColor(color: UIColor.white.withAlphaComponent(0)), for: UIControl.State.highlighted)
+
+        let guidView: ADGuidesAlertView = ADGuidesAlertView(delegate: self, dataArray: [UIImage.ad_imageWithTheColor(color: UIColor.green.withAlphaComponent(1)), UIImage.ad_imageWithTheColor(color: UIColor.yellow.withAlphaComponent(1))])
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
-        config.showsSeparators = true
-        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
-        //        [advertView show]
-
-        let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
-
-
-        alertView.show()
+        guidView.show()
     }
     
     
@@ -571,17 +581,47 @@ extension ADFunctionTableVC {
     }
 
     @objc func actionSheetStyleScrollableButton() {
-        let sureAction: ADAlertAction = ADAlertAction.actionWithTitle("确定", ADActionStyle.default) { (_) in
-            print("点击了确定")
-        }
+        let actionConfig: ADAlertActionConfiguration = ADAlertActionConfiguration.defaultConfigurationWithActionStyle(style: ADActionStyle.default)
         
-        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.alert)
+        let action1: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_1"), ADActionStyle.cancel, complete: { (_) in
+            print("share_1")
+        }, configuration: actionConfig)
+        
+        let action2: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_2"), ADActionStyle.cancel, complete: { (_) in
+            print("share_2")
+        }, configuration: actionConfig)
+
+        let action3: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_3"), ADActionStyle.cancel, complete: { (_) in
+            print("share_3")
+        }, configuration: actionConfig)
+
+        let action4: ADAlertAction = ADAlertAction.actionWithTitleFull(nil, UIImage(named: "share_4"), ADActionStyle.cancel, complete: { (_) in
+            print("share_4")
+        }, configuration: actionConfig)
+
+        let action5: ADAlertAction = ADAlertAction.actionWithTitleFull("短信", nil, ADActionStyle.cancel, complete: { (_) in
+            print("短信")
+        }, configuration: actionConfig)
+
+        let action6: ADAlertAction = ADAlertAction.actionWithTitleFull("支付宝", nil, ADActionStyle.cancel, complete: { (_) in
+            print("支付宝")
+        }, configuration: actionConfig)
+
+        let action7: ADAlertAction = ADAlertAction.actionWithTitleFull("微信", nil, ADActionStyle.cancel, complete: { (_) in
+            print("微信")
+        }, configuration: actionConfig)
+
+        let group: ADScrollableGroupAction = ADScrollableGroupAction.scrollActionWithActions(actions: [action1, action2, action3, action4, action5, action6, action7])!
+
+        let config: ADAlertControllerConfiguration = ADAlertControllerConfiguration(preferredStyle: ADAlertControllerStyle.actionSheet)
         config.showsSeparators = true
-        //        ADAdvertView *advertView = [ADAdvertView advertViewWithDelegate:self dataArray:@[@"1",@"2"]]
-        //        [advertView show]
 
-        let alertView: ADAlertController = ADAlertController(configuration: config, title: "没有完成", message: nil, actions: [sureAction])
+        let alertView: ADAlertController = ADAlertController(configuration: config, title: "这里是标题", message: nil, actions: [group])
 
+        let cancelAction: ADAlertAction = ADAlertAction.actionWithTitle("取消", ADActionStyle.sheetCancel) { (_) in
+            print("点击了取消")
+        }
+        alertView.addActionSheetCancelAction(cancelAction: cancelAction)
 
         alertView.show()
     }

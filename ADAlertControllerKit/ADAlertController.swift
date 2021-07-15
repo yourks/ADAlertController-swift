@@ -116,7 +116,7 @@ class ADAlertController: UIViewController, AlertStyleTransitionBehaviorProtocol 
 
 
     // 自定义
-    convenience init(configuration: ADAlertControllerConfiguration?, title: String, message: String?, actions: [ADAlertAction]?) {
+    convenience init(configuration: ADAlertControllerConfiguration?, title: String?, message: String?, actions: [ADAlertAction]?) {
         
         self.init(nibName: nil, bundle: nil)
         

@@ -52,6 +52,8 @@
 		18B435A62697144A007826DB /* UIImage+ADButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B435A52697144A007826DB /* UIImage+ADButtonExt.swift */; };
 		18D6E5B72689ABDB00B37ACF /* ADAlertControllerConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6E5B62689ABDB00B37ACF /* ADAlertControllerConst.swift */; };
 		18E17C04268AC343002ED7DC /* ADAlertActionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E17C03268AC343002ED7DC /* ADAlertActionConfiguration.swift */; };
+		18ED952B269FD8A300738E5B /* ADGuidesAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ED952A269FD8A300738E5B /* ADGuidesAlertView.swift */; };
+		18ED9530269FDBFD00738E5B /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18ED952F269FDBFD00738E5B /* close@3x.png */; };
 		396B03EA3CFC4BD0F38B41C2 /* Pods_ADAlertController_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A80707300ED99A7086093BD /* Pods_ADAlertController_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +126,8 @@
 		18B435A52697144A007826DB /* UIImage+ADButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ADButtonExt.swift"; sourceTree = "<group>"; };
 		18D6E5B62689ABDB00B37ACF /* ADAlertControllerConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAlertControllerConst.swift; sourceTree = "<group>"; };
 		18E17C03268AC343002ED7DC /* ADAlertActionConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAlertActionConfiguration.swift; sourceTree = "<group>"; };
+		18ED952A269FD8A300738E5B /* ADGuidesAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADGuidesAlertView.swift; sourceTree = "<group>"; };
+		18ED952F269FDBFD00738E5B /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "close@3x.png"; path = "ADAlertControllerKit/CustomView/Recourse/close@3x.png"; sourceTree = SOURCE_ROOT; };
 		1A80707300ED99A7086093BD /* Pods_ADAlertController_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ADAlertController_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C16C552A874BA8F39477430 /* Pods-ADAlertController-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ADAlertController-swift.release.xcconfig"; path = "Target Support Files/Pods-ADAlertController-swift/Pods-ADAlertController-swift.release.xcconfig"; sourceTree = "<group>"; };
 		F90FEB18EE34632940D470E1 /* Pods-ADAlertController-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ADAlertController-swift.debug.xcconfig"; path = "Target Support Files/Pods-ADAlertController-swift/Pods-ADAlertController-swift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -342,6 +346,7 @@
 		189097E626856A420003D894 /* ADAlertControllerKit */ = {
 			isa = PBXGroup;
 			children = (
+				18ED9509269FCD6900738E5B /* CustomView */,
 				189097E726856A720003D894 /* ADAlertController.swift */,
 				18055EC7268EBE0700A0B667 /* ADAlertControllerPriorityQueue.swift */,
 				18AED9CF2685BBF100115D75 /* ADAlertControllerConfiguration.swift */,
@@ -373,6 +378,23 @@
 				18055ED6268EBE8200A0B667 /* ADScrollableGroupAction.swift */,
 			);
 			path = ADAlertAction;
+			sourceTree = "<group>";
+		};
+		18ED9509269FCD6900738E5B /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				18ED9534269FDC1500738E5B /* Recourse */,
+				18ED952A269FD8A300738E5B /* ADGuidesAlertView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		18ED9534269FDC1500738E5B /* Recourse */ = {
+			isa = PBXGroup;
+			children = (
+				18ED952F269FDBFD00738E5B /* close@3x.png */,
+			);
+			path = Recourse;
 			sourceTree = "<group>";
 		};
 		3726BF3FEB7B9EAE4914693F /* Frameworks */ = {
@@ -498,6 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18ED9530269FDBFD00738E5B /* close@3x.png in Resources */,
 				180FF00B2682C3B300352621 /* LaunchScreen.storyboard in Resources */,
 				180FF0082682C3B300352621 /* Assets.xcassets in Resources */,
 				180FF0062682C3B100352621 /* Main.storyboard in Resources */,
@@ -612,6 +635,7 @@
 				189097CE268470320003D894 /* ADBaseView.swift in Sources */,
 				18055EF6268EC26000A0B667 /* ADAlertButton.swift in Sources */,
 				180FF0032682C3B100352621 /* ViewController.swift in Sources */,
+				18ED952B269FD8A300738E5B /* ADGuidesAlertView.swift in Sources */,
 				189097D3268470530003D894 /* ADBaseTableCell.swift in Sources */,
 				180FF0592682C67600352621 /* ADTabbarVC.swift in Sources */,
 				189097D8268470680003D894 /* ADFunctionTableCell.swift in Sources */,

@@ -41,6 +41,18 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
 
     // MARK: - propert/protrocal
     var title: String? {
+        willSet {
+            if newValue?.count ?? 0 == 0 {
+                titleLabel?.snp.remakeConstraints { (constraintMaker) in
+                    constraintMaker.left.equalToSuperview().offset(15)
+                    constraintMaker.right.equalToSuperview().offset(-15)
+                    constraintMaker.top.equalToSuperview().offset(0)
+                    constraintMaker.height.greaterThanOrEqualTo(0)
+                }
+
+                titleLabel?.layoutIfNeeded()
+            }
+        }
         didSet {
             titleLabel?.text = title
         }
@@ -309,8 +321,8 @@ class ADAlertView: UIView, ADAlertControllerViewProtocol {
         }
 
         messageTextView?.snp.makeConstraints { (constraintMaker) in
-            constraintMaker.left.right.equalToSuperview()
-            constraintMaker.centerX.equalToSuperview()
+            constraintMaker.left.equalToSuperview().offset(15)
+            constraintMaker.right.equalToSuperview().offset(-15)
             constraintMaker.top.equalTo(titleLabel!.snp_bottom).offset(15)
             constraintMaker.height.greaterThanOrEqualTo(20)
         }

@@ -16,14 +16,13 @@ class ADAlertGroupAction: ADAlertAction {
     // 分割线是否显示
     public var showsSeparators: Bool?
 
-    
     // MARK: - proprety/private
     
     // Array ADAlertAction
-    private var actions: [ADAlertAction]?
+    var actions: [ADAlertAction]?
     
     // UIStackView
-    private var actionButtonStackView: UIStackView?
+    var actionButtonStackView: UIStackView?
 
     // 重写viewController
     internal override var viewController: UIViewController? {
@@ -69,13 +68,6 @@ class ADAlertGroupAction: ADAlertAction {
         groupAction.actions = actions
         
         // FIXME: NSException
-//        seperatorView.backgroundColor = separatorColor
-
-//        groupAction.handler
-//        [groupedAction setHandler:^(ADAlertAction *controller) {
-//            [NSException raise:@"ADInconsistencyException" format:@"The handler of a grouped action has been called."]
-//        }]
-
         return groupAction
     }
     
@@ -84,11 +76,6 @@ class ADAlertGroupAction: ADAlertAction {
         
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.clear
-
-        if self.showsSeparators == true {
-            view.backgroundColor = separatorColor
-        }
 
         self.actionButtonStackView = UIStackView()
         self.actionButtonStackView?.setContentCompressionResistancePriority(UILayoutPriority.required, for: NSLayoutConstraint.Axis.vertical)

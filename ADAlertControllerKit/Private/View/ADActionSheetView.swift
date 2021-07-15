@@ -44,6 +44,18 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
     
     // 标题
     var title: String? {
+        willSet {
+            if newValue?.count ?? 0 == 0 {
+                titleLabel?.snp.remakeConstraints { (constraintMaker) in
+                    constraintMaker.left.equalToSuperview().offset(15)
+                    constraintMaker.right.equalToSuperview().offset(-15)
+                    constraintMaker.top.equalToSuperview().offset(0)
+                    constraintMaker.height.greaterThanOrEqualTo(0)
+                }
+
+                titleLabel?.layoutIfNeeded()
+            }
+        }
         didSet {
             titleLabel?.text = title
         }
@@ -80,10 +92,12 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             if contentViewHeight == nil, contentViewHeight ?? 0 <= 0 {
                 contentViewHeight = 250
             }
-
             contentViewContainerView?.addSubview(contentView!)
-            contentViewContainerView?.snp.updateConstraints { (constraintMaker) in
+            contentViewContainerView?.snp.remakeConstraints { (constraintMaker) in
                 constraintMaker.height.greaterThanOrEqualTo(contentViewHeight!)
+                constraintMaker.left.equalToSuperview().offset(15)
+                constraintMaker.right.equalToSuperview().offset(-15)
+                constraintMaker.top.equalTo(messageTextView!.snp_bottom).offset(0)
             }
             
             contentView?.snp.makeConstraints({ (constraintMaker) in
@@ -118,8 +132,12 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
                 actionButtonStackView?.alignment = UIStackView.Alignment.fill
                 actionButtonStackView?.distribution = UIStackView.Distribution.fillEqually
 
-                actionButtonContainerView?.snp.updateConstraints { (constraintMaker) in
+                actionButtonContainerView?.snp.remakeConstraints { (constraintMaker) in
+                    constraintMaker.left.equalToSuperview()
+                    constraintMaker.right.equalToSuperview()
+                    constraintMaker.top.equalTo(contentViewContainerView!.snp_bottom).offset(15)
                     constraintMaker.height.greaterThanOrEqualTo(actionButtonContainerViewHeight)
+                    constraintMaker.bottom.equalToSuperview()
                 }
                 
                 actionButtonContainerView?.layoutIfNeeded()
@@ -360,6 +378,8 @@ class ADActionSheetView: UIView, ADAlertControllerViewProtocol {
             constraintMaker.top.equalTo(messageTextView!.snp_bottom).offset(0)
             constraintMaker.height.greaterThanOrEqualTo(0)
         }
+        
+        self.layoutTopBtnView()
     }
     
     internal func layoutTopBtnView() {
