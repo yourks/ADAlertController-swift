@@ -1,0 +1,6 @@
+framework module Pods_ADAlertController_swift_Tests {
+  umbrella header "Pods-ADAlertController-swift_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
