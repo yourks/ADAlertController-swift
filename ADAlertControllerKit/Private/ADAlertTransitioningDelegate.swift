@@ -7,7 +7,12 @@
 
 import UIKit
 
-protocol ADAlertTransitioningDelegate {
+protocol ADAlertTransitioningDelegate: NSObject {
+    
+    /**
+     alertAction 显示的标题字体,默认为[UIFont preferredFontForTextStyle:UIFontTextStyleBody]
+     */
+    var titleFont: UIFont? { get set }
 
 }
 

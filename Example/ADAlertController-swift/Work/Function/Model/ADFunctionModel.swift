@@ -12,13 +12,13 @@ class ADFunctionModel: ADBaseModel {
     
     var selector: String?
     
-    func getData(_ title: String , _ selector: String) -> ADFunctionModel {
+    func getData(_ title: String, _ selector: String) -> ADFunctionModel {
         
         let functionModel = ADFunctionModel()
         
-        functionModel.title = title;
+        functionModel.title = title
         
-        functionModel.selector = selector;
+        functionModel.selector = selector
         
         return functionModel
     }

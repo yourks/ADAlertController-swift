@@ -30,27 +30,28 @@ class ADFunctionTableCell: ADBaseTableCell {
         cellConfigUI()
     }
     
-    lazy var titleLab :UILabel = {
-        let tl = UILabel()
-        tl.text = "cellTitle";
-        return tl
+    lazy var titleLab: UILabel = {
+        let tlab = UILabel()
+        tlab.text = "cellTitle"
+        return tlab
     }()
 
-    func cellConfigUI()  {
+    func cellConfigUI() {
         
         contentView.addSubview(titleLab)
         titleLab.frame = CGRect(x: 0, y: 0, width: 300, height: contentView.frame.size.height)
         
         let moreTitle = UILabel()
         moreTitle.frame = CGRect(x: contentView.frame.size.width - 75, y: 0, width: 75, height: contentView.frame.size.height)
-        moreTitle.text = "更多";
+        moreTitle.text = "更多"
 
     }
     
-    public var model :ADFunctionModel? {
-        didSet{
+    public var model: ADFunctionModel? {
+        
+        didSet {
             guard let model = model else {return}
-            titleLab.text = model.title;
+            titleLab.text = model.title
         }
     }
     
