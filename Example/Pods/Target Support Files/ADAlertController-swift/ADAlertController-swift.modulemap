@@ -1,0 +1,6 @@
+framework module ADAlertController_swift {
+  umbrella header "ADAlertController-swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "ADAlertController-swift",
+  "version": "0.1.0",
+  "summary": "A short description of ADAlertController-swift.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/apple/ADAlertController-swift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "apple": "568986318@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/apple/ADAlertController-swift.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ADAlertController-swift/Classes/**/*"
+}
